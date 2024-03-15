@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        input[type=text], input[type=password] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px; 
+        }
+        button {
+           padding:10px; 
+           background-color:#3333cc; 
+           color:white; 
+           border:none; 
+           cursor:pointer; 
+           align-items: center;
+       }
+       button:hover {background-color:#5555dd;}
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <p>Welcome! Please sign-in to access your account</p>
+
+    <form action="/action_page.php" method="post">
+      <label for="email">EMAIL</label><br>
+      <input type="text" id="email" name="email" placeholder="Enter your email"><br><br>
+
+      <label for="password">PASSWORD</label><br>
+      <input type="password" id="password" name="password" placeholder=""><br><br>
+
+      <button type='submit'>Sign in</button>  
+      
+      </form> 
+
+     Don't have an account yet? Create an account
+</div>
+
+</body>
+</html>  
