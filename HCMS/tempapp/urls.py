@@ -19,7 +19,9 @@ from django.urls import path, include
 from tempapp import views
 
 urlpatterns = [
-    path("", views.index, name='home'),
+    path("",views.index,name="home"),
+    path("login", views.loginUser, name='login'),
+    path("logout",views.logoutUser,name="logout"),
     path("about", views.about, name='about'),
     path("services", views.services, name='sevices'),
     path("contact", views.contact, name='contact'),
