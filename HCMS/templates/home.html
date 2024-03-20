@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Complaint Management System</title>
+    <style>
+        
+          
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light background color */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex; /* Make the container a flex container */
+            justify-content: space-between; /* Space out the elements */
+            align-items: center;
+            flex-wrap: wrap; /* Wrap items to new lines if needed */
+        }
+        header {
+            background: #ff9f43; /* Light orange navigation bar */
+            color: white;
+            padding: 15px 0;
+            width: 100%; /* Make the header full width */
+        }
+
+        footer {
+            background: #ff9f43; /* Light orange navigation bar */
+            color: white;
+            padding: 15px 0;
+            width: 100%; /* Make the header full width */
+        }
+    
+        #branding {
+            width: 45%; /* Adjusted width for branding */
+            text-align: left; /* Align branding to the right */
+            padding-left: 20px; /* Add padding for spacing */
+            margin-top: 50px;
+        }
+        #branding h1 {
+            font-size: 48px; /* Increased font size */
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Cool font */
+            color: #ff9f43; /* Light orange color */
+        }
+        #branding p {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #495057; /* Dark gray color */
+            text-align: left; /* Align text to the right */
+        }
+        #sign-in {
+            width: 45%; /* Adjusted width for sign-in */
+            text-align: center; /* Keep sign-in centered */
+        }
+        #sign-in h2 {
+            font-size: 24px;
+            margin-top: 0;
+            color: #495057; /* Dark gray color */
+        }
+        #sign-in button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ff9f43; /* Light orange button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <div id="branding">
+            <h1>HOSTEL COMPLAINT MANAGEMENT SYSTEM</h1>
+            <p>A system designed to streamline complaint handling and management within hostels, providing efficient resolution and improved communication between residents and staff.</p>
+            <ul>
+                <li>Efficient complaint submission and tracking</li>
+                <li>Automated assignment of complaints to relevant staff</li>
+                <li>Real-time updates and notifications for residents</li>
+                <li>Centralized database for easy access to complaint history</li>
+            </ul>
+        </div>
+        <div id="sign-in">
+            <h2>Sign in as</h2>
+            <button onclick="redirectToNewPage()">Student</button>
+            <button onclick="redirectToNewPage_staff()">Staff</button>
+        </div>
+    </div>
+    <script>
+        function redirectToNewPage() {
+          window.location.href = "/login";
+        }
+      </script>
+      <script>
+        function redirectToNewPage_staff() {
+          window.location.href = "/login_staff";
+        }
+      </script>
+
+<footer> Contact Us at: </footer>
+
+</body>
+</html>

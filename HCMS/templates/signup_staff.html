@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 400px;
+            max-width: 100%;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: #e8491d;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #d63b10;
+        }
+
+        label{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Staff Signup</h2>
+        <p>
+            <form action="/login_staff" method="post">
+                {% csrf_token %}
+                <label for="id" style="text-align: left;">ID</label><br>
+                <input type="text" id="id" name="id" placeholder="Enter your id"><br>
+                <label for="full_name" style="text-align: left;">Full Name</label><br>
+                <input type="text" id="full_name" name="full_name" placeholder=""><br>
+                <label for="email" style="text-align: left;">Email</label><br>
+                <input type="email" id="email" name="email" placeholder=""><br>
+                <label for="phone" style="text-align: left;">Phone No.</label><br>
+                <input type="text" id="phone" name="phone" placeholder=""><br>
+                <label for="password" style="text-align: left;">Password</label><br>
+                <input type="password" id="password" name="password" placeholder=""><br>
+                <label for="category" style="text-align: left;">Category</label><br>
+                <input type="text" id="category" name="category" placeholder=""><br>
+                <button type='submit'>Signup</button>  
+            </form> 
+        </p>
+    </div>
+</body>
+</html>

@@ -19,10 +19,11 @@ from django.urls import path, include
 from tempapp import views
 
 urlpatterns = [
-    path("",views.index,name="home"),
-    path("login", views.loginUser, name='login'),
+    path("",views.home,name="home"),
+    path("index",views.index,name="index"),
+    path("login", views.loginUser_asStudent, name='login'),
+    path("login_staff", views.loginUser_asStaff, name='login_staff'),
     path("logout",views.logoutUser,name="logout"),
-    path("about", views.about, name='about'),
-    path("services", views.services, name='sevices'),
-    path("contact", views.contact, name='contact'),
+    path("signup",views.signup,name="signup"),
+    path("signupstaff",views.signupstaff,name="signupstaff")
 ]
