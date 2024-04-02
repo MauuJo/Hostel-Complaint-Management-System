@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'HCMS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hcms_db',
+        'NAME': 'hcms',
         'USER': 'root',
         'PASSWORD':'' ,
         'HOST': 'localhost',

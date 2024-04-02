@@ -72,6 +72,11 @@
                 <label for="roomno" style="text-align: left;">Room No.</label><br>
                 <input type="text" id="roomno" name="roomno" placeholder=""><br>
                 <button type='submit'>Signup</button>  
+
+                {% if messages %}{% for message in messages %}
+                <h2 sytle="colour: green;">{{message}}</h2>
+                {% endfor %}
+                {% endif %}
             </form> 
         </p>        
     </div>
