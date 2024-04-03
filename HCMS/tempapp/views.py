@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
-from .models import staff, student
+from .models import staff, student, hostel, category, complaint
 from django.contrib import messages
 
 # Create your views here.
@@ -46,16 +46,17 @@ def logoutUser(request):
 
 def signup(request):
     if request.method == "POST":
-        studentid = request.POST.get('id')
-        full_name = request.POST.get('full_name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        password = request.POST.get('password')
-        hostel = request.POST.get('hostel')
-        roomno = request.POST.get('roomno')
+        s = request.POST.get('id')
+        f = request.POST.get('full_name')
+        e = request.POST.get('email')
+        p = request.POST.get('phone')
+        pas = request.POST.get('password')
+        h = request.POST.get('hostel')
+        r = request.POST.get('roomno')
 
         # Save the form data to the database
-        sample=student(student_id=studentid,full_name=full_name, email=email,phone=phone, password=password, hostel=hostel, room_no=roomno)
+        hostel_object = hostel.objects.get(hostel_id = h)
+        sample=student.objects.create(student_id=s,full_name=f, email=e,phone=p, password=pas, hostel_id=hostel_object, room_no=r)
         sample.save()
         messages.success(request,"Account created successfully, please login")
         return redirect('/login')  # Redirect to a success page after successful signup

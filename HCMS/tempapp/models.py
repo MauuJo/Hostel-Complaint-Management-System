@@ -85,6 +85,10 @@ class student(models.Model):
     room_no = models.IntegerField()
     class Meta:
         db_table='student'
+    
+    def save(self, *args, **kwargs):
+        # Call the superclass save method to perform the actual saving
+        super().save(*args, **kwargs)
 
 class complaint(models.Model):
     category = models.ForeignKey(category, on_delete=models.CASCADE) 
