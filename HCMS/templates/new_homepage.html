@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Submission Form</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: red;
+        }
+
+        .container {
+            width: 200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px !important;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .complaint-box {
+            width: 350px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            flex: 0 0 30%; /* Set the width of each box */
+            margin: 10px;
+            background-color: #FFFFFF
+        }
+        
+        .complaint-box h3 {
+            margin-top: 0;
+            font-size:20px; 
+            font-weight:500;
+        }
+        
+        .complaint-box h4 {
+            margin-top: 5px;
+            font-size:10px; 
+            font-weight:500;
+            
+            
+        }
+        
+        .complaint-box p {
+            margin-top: 10px;
+            font-size:12px; 
+            color: #888;
+        }
+        
+        .status-button {
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .complaint-box-container {
+            display: flex; 
+            flex-wrap: wrap; 
+        }
+
+        .intro-box-container{
+            margin-left:20px;
+            margin-right:20px;
+            margin-top: 50px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between; /* Adjust alignment as needed */
+            margin-bottom: 20px;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 100px;
+        }
+        
+        .image-container div {
+            text-align: center; /* Center the text below each image */
+        }
+        
+        .image-container img {
+            width: 150px; /* Adjust the width of the images */
+            height: auto;
+            border-radius: 2px; /* Optional: Add rounded corners to the images */
+        }
+        
+        .image-container p {
+            width: 180px; /* Adjust the width of the images */
+            margin-top: 20px;
+        }
+
+        #sign-in {
+            width: 45%; /* Adjusted width for sign-in */
+            margin: 0 auto; /* Set left and right margins to auto */
+            text-align: center; /* Keep sign-in content centered */
+        }
+        #sign-in h2 {
+            font-size: 24px;
+            margin-top: 0;
+            color: #495057; /* Dark gray color */
+        }
+        #sign-in button {
+            padding: 10px 20px;
+            font-size: 18px;
+            <!--background-color: #ff9f43;--> /* Light orange button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            width: 120px;
+        }
+
+        footer.contact-section {
+            
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: lightblue;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .contact-container {
+            background-color: lightblue;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .contact-section {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-details {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .left-details,
+        .right-details {
+            flex: 1;
+        }
+        
+        .contact-section h2 {
+            margin-bottom: 10px;
+        }
+        
+        .contact-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contact-section ul li {
+            margin-bottom: 5px;
+        }
+        
+        
+        
+        
+        
+
+        
+
+        
+
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+</head>
+<body style="margin-bottom:100px;background-color: #F0F0F0;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="background-color: #e0e0e0; padding-left: 50px; padding-right: 50px; width: 100%; height:80px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">Hostel Complaint Redressal System</a>
+            <!--<div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: black;">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-success" type="submit">Logout</button>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+      </nav>
+
+      <div class="intro-box-container">
+        <p>
+            Welcome to the Hostel Complaint Management System – your reliable companion for seamless 
+            complaint resolution within our hostels. Our purpose-built system empowers residents and 
+            staff alike, fostering efficient communication channels. Whether it’s a noisy neighbor, 
+            a maintenance issue, or any concern, our platform ensures swift handling, transparency, 
+            and resident satisfaction. Join us in creating a harmonious living environment!
+        </p>
+      </div>
+
+      <div class="image-container">
+        <div>
+            <img src="C:\Users\mansi\Downloads\1.jpg" alt="Image 1">
+            <p>Efficient complaint submission and tracking</p>
+        </div>
+        <div>
+            <img src="C:\Users\mansi\Downloads\2.jpg" alt="Image 2">
+            <p>Automated assignment of complaints to relevant staff</p>
+        </div>
+        <div>
+            <img src="C:\Users\mansi\Downloads\3.jpg" alt="Image 3">
+            <p>Real-time updates and notifications for residents</p>
+        </div>
+        <div>
+            <img src="C:\Users\mansi\Downloads\4.jpg" alt="Image 4">
+            <p>Centralized database for easy access to complaint history</p>
+        </div>
+    </div>
+
+    <div id="sign-in">
+        <h2>Sign in as</h2>
+        <button onclick="redirectToNewPage()">Student</button>
+        <button onclick="redirectToNewPage_staff()">Staff</button>
+    </div>
+
+    
+        <div class="contact-container">
+            <div>
+                <h2>Contact Us</h2>
+                <div class="contact-details">
+                    <div class="left-details">
+                        <ul>
+                            <li><strong>Address:</strong> 123 Main Street, City, Country</li>
+                            <li><strong>Phone:</strong> +1234567890</li>
+                        </ul>
+                    </div>
+                    <div class="right-details">
+                        <ul>
+                            <li><strong>Email:</strong> example@example.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+
+    <script>
+        function redirectToNewPage() {
+          window.location.href = "/login";
+        }
+      </script>
+      <script>
+        function redirectToNewPage_staff() {
+          window.location.href = "/login_staff";
+        }
+    </script>
+    
+
+</body>
+</html>

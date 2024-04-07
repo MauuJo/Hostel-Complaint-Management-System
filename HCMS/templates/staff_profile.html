@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Submission Form</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px !important;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .student-details-box {
+            width: 500px; /* Adjust width as needed */
+            padding: 10px;
+            margin: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            background-color:#FFFFFF
+        }
+        
+        .student-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc; /* Add border bottom */
+            padding-bottom: 5px; /* Add padding to separate details */
+        }
+        
+        .detail-name {
+            flex: 1;
+        }
+        
+        .detail-value {
+            flex: 1;
+            text-align: right;
+        }
+        
+        
+        
+
+        
+
+    </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body style="margin-bottom:100px;background-color: #F0F0F0;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="background-color: #e0e0e0; padding-left: 50px; padding-right: 50px; width: 100%; height:80px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">MNIT Hostels</a>
+            <div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: black;">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-success" type="submit">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+    
+
+    <div style="width: 100%; text-align:left; padding-left:25px;">
+        <p style="font-size:20px; font-weight:500; margin-top:20px;">Profile</p>
+        <!-- Check if complaints exist -->
+        <!-- If no complaints, display "No complaints registered yet" -->
+        <!-- If complaints exist, display them in boxes side by side -->
+        
+    </div>
+
+    <div class="student-details-box">
+        <div class="student-detail">
+            <span class="detail-name">Name:</span>
+            <span class="detail-value">John Doe</span>
+        </div>
+        <div class="student-detail">
+            <span class="detail-name">Email:</span>
+            <span class="detail-value">john@gmail.com</span>
+        </div>
+        <div class="student-detail">
+            <span class="detail-name">Contact Number:</span>
+            <span class="detail-value">7689034562</span>
+        </div>
+        <div class="student-detail">
+            <span class="detail-name">Hostel:</span>
+            <span class="detail-value">Gargi</span>
+        </div>
+        <div class="student-detail" style="border: 0px solid #ccc;">
+            <span class="detail-name">Room no:</span>
+            <span class="detail-value">306</span>
+        </div>
+        <!-- Add more details here as needed -->
+
+        
+    </div>
+
+    <button type="submit" style="margin-left:25px;">Back</button>
+
+    
+    
+
+</body>
+</html>
