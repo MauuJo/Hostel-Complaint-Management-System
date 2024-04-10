@@ -25,5 +25,7 @@ urlpatterns = [
     path("login_staff", views.loginUser_asStaff, name='login_staff'),
     path("logout",views.logoutUser,name="logout"),
     path("signup",views.signup,name="signup"),
-    path("signupstaff",views.signupstaff,name="signupstaff")
+    path("signupstaff",views.signupstaff,name="signupstaff"),
+    path("lodgecomplaint",views.lodgecomplaint,name="lodgecomplaint"),
+    path("checkcomplaint",views.checkcomplaint,name="checkcomplaint"),
 ]

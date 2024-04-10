@@ -94,7 +94,7 @@ class complaint(models.Model):
     category = models.ForeignKey(category, on_delete=models.CASCADE) 
     hostel = models.ForeignKey(hostel, on_delete=models.CASCADE) 
     student = models.ForeignKey(student, on_delete=models.CASCADE) 
-    staff = models.ForeignKey(staff, on_delete=models.CASCADE) 
+    staff = models.ForeignKey(staff, on_delete=models.CASCADE,null=True) 
     description = models.TextField()
     room_no = models.IntegerField()
     status = models.BooleanField()

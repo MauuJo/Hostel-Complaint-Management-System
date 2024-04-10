@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.db import transaction
 
 def home(request):
-    return render(request,'home.html')
+    return render(request,'new_homepage.html')
 
 def index(request):
     if request.user.is_anonymous:
@@ -32,10 +32,8 @@ def loginUser_asStudent(request):
             #user = authenticate(username=student_object.student_id, password=student_object.password)
             if password==student_object.password:
                 #messages.success(request, "Login successful")
-                context={
-                    'name': student_object.full_name
-                }
-                return render(request,'index.html',context)
+                request.session['username'] = username
+                return redirect('/lodgecomplaint')
             else:
                 #messages.error(request, "Invalid username or password")
                 pass
@@ -60,10 +58,8 @@ def loginUser_asStaff(request):
             #user = authenticate(username=student_object.student_id, password=student_object.password)
             if password==staff_object.password:
                 #messages.success(request, "Login successful")
-                context={
-                    'name': staff_object.full_name
-                }
-                return render(request,'index_staff.html',context)
+                request.session['username'] = username
+                return redirect('/checkcomplaint')
             else:
                 #messages.error(request, "Invalid username or password")
                 pass
@@ -117,3 +113,50 @@ def signupstaff(request):
         #messages.success(request,"Account created successfully, please login")
         return redirect('/login_staff')  # Redirect to a success page after successful signup
     return render(request, 'signup_staff.html')
+
+def lodgecomplaint(request):
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    if request.method == 'POST':
+        c_id = request.POST.get('category')
+        describe = request.POST.get('complaint')
+
+        category_object = category.objects.get(category_id = c_id)
+        hostel_object = hostel.objects.get(hostel_id = 1)
+        roomno=student_object.room_no
+        #staff_object=staff.objects.get(staff_id=7)
+
+        sample=complaint.objects.create(category=category_object,hostel=hostel_object, student=student_object, description=describe,room_no=roomno)
+        sample.is_active=True
+        if sample.staff is None:
+            # Reload the complaint object from the database to fetch the updated staff_id
+            #sample = complaint.objects.get(pk=sample.pk)
+            #sample.save()
+            sample.refresh_from_db()
+        sample.save()
+
+        #transaction.commit()
+        return redirect('/lodgecomplaint')
+    complaints=complaint.objects.filter(student_id=student_object)
+    context={
+                'name': student_object.full_name,
+                'complaints': complaints,
+            }
+    return render(request,'student_dashboard.html',context)
+
+def checkcomplaint(request):
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    complaints=complaint.objects.filter(staff_id=staff_object)
+    context={
+                'name': staff_object.full_name,
+                'complaints': complaints
+            }
+    return render(request,'staff_dashboard.html',context)
+
+
+
+
+
+
+

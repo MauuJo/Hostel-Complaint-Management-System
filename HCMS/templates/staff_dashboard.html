@@ -121,7 +121,7 @@
                         <a class="nav-link" href="#" style="color: black;">Account</a>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-outline-success" type="submit">Logout</button>
+                        <button class="btn btn-outline-success" type="submit"> <a href="/logout">Logout</a></button>
                     </li>
                 </ul>
             </div>
@@ -130,92 +130,34 @@
     
 
     <div style="width: 100%; text-align:left; padding-left:25px;">
+        <p style="font-size:20px; font-weight:500; margin-top:20px;">Welcome {{name}}</p>
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
         <!-- Check if complaints exist -->
         <!-- If no complaints, display "No complaints registered yet" -->
         <!-- If complaints exist, display them in boxes side by side -->
+        {% if not complaints %}
         <div>
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
-            <p>No complaints assigned yet</p>
+            <p>No complaints registered yet</p>
         </div>
-        <!--
+        {% else %}
+        <div class="complaint-box-container">
         {% for complaint in complaints %}
         <div class="complaint-box">
-            <h3>{{ complaint.heading }}</h3>
-            <h4>{{ complaint.subheading }}</h4>
-            <h4>{{ complaint.subheading }}</h4>
+            
+            <h4>{{ complaint.category }}</h4>
+            <h4>{{ complaint.created_at }}</h4>
             <p>{{ complaint.description }}</p>
-            {% if complaint.completed %}
-            <button class="status-button" style="background-color: green;">Completed</button>
+            {% if complaint.status == 1 %}
+            <button class="status-button" style="background-color: #5cb65c;">Completed</button>
             {% else %}
-            <button class="status-button" style="background-color: red;">Not Completed</button>
+            <button class="status-button" style="background-color: hwb(1 20% 22%) ;">Not Completed</button>
             {% endif %}
+            <button class="status-button" style="background-color: hsl(195, 56%, 62%);">Delete</button>
         </div>
-        {% endfor %}-->
-
-    <div class="complaint-box-container">
-        
-        <div class="complaint-box">
-            <h3>Switch is not working(Room No.L block - 27)</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <button class="status-button" style="background-color: red;">Delete</button>
-           
+        {% endfor %}
         </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working(Room No.L block - 27)</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <button class="status-button" style="background-color: red;">Delete</button>
-           
-        </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working(Room No.L block - 27)</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <button class="status-button" style="background-color: red;">Delete</button>
-           
-        </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working(Room No.L block - 27)</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <button class="status-button" style="background-color: red;">Delete</button>
-           
-        </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working(Room No.L block - 27)</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <button class="status-button" style="background-color: red;">Delete</button>
-           
-        </div>
-    </div>
-
+        {% endif %}
 
     </div>
 

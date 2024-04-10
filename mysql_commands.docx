@@ -1,0 +1,45 @@
+Creating trigger:
+
+DELIMITER //
+CREATE TRIGGER assign_staff
+BEFORE INSERT ON complaint
+FOR EACH ROW
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE cat INT;
+    DECLARE c INT;
+    DECLARE s INT;
+
+    -- Declare a cursor to handle multiple rows in the SELECT statement
+    DECLARE staff_cursor CURSOR FOR
+        SELECT category_id, count, staff_id
+        FROM staff
+        WHERE NEW.category_id = staff.category_id;
+
+    -- Declare a handler for the case when multiple rows are returned
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN staff_cursor;
+
+    fetch_staff: LOOP
+        FETCH staff_cursor INTO cat, c, s;
+
+        IF done = 1 THEN
+            -- No more rows found, exit the loop
+            LEAVE fetch_staff;
+        END IF;
+
+        IF c <= 5 THEN
+            SET NEW.staff_id = s;
+            UPDATE staff
+            SET count = count + 1
+            WHERE staff_id = s;
+            LEAVE fetch_staff; -- Exit loop after assigning staff
+        END IF;
+    END LOOP;
+
+    CLOSE staff_cursor;
+
+END //
+
+DELIMITER ;

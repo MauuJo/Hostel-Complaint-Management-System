@@ -121,7 +121,7 @@
                         <a class="nav-link" href="#" style="color: black;">Account</a>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-outline-success" type="submit">Logout</button>
+                        <button class="btn btn-outline-success" type="submit" > <a href="/logout">Logout</a></button>
                     </li>
                 </ul>
             </div>
@@ -130,94 +130,35 @@
     
 
     <div style="width: 100%; text-align:left; padding-left:25px;">
+        <p style="font-size:20px; font-weight:500; margin-top:20px;">Welcome {{name}}</p>
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
         <!-- Check if complaints exist -->
         <!-- If no complaints, display "No complaints registered yet" -->
         <!-- If complaints exist, display them in boxes side by side -->
+        {% if not complaints %}
         <div>
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
             <p>No complaints registered yet</p>
         </div>
-        <!--
+        {% else %}
+        <div class="complaint-box-container">
         {% for complaint in complaints %}
         <div class="complaint-box">
-            <h3>{{ complaint.heading }}</h3>
-            <h4>{{ complaint.subheading }}</h4>
-            <h4>{{ complaint.subheading }}</h4>
+            
+            <h4>{{ complaint.category }}</h4>
+            <h4>{{ complaint.created_at }}</h4>
             <p>{{ complaint.description }}</p>
-            {% if complaint.completed %}
+            {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: green;">Completed</button>
             {% else %}
             <button class="status-button" style="background-color: red;">Not Completed</button>
             {% endif %}
         </div>
-        {% endfor %}-->
-
-    <div class="complaint-box-container">
-        
-        <div class="complaint-box">
-            <h3>Switch is not working</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <!--<button class="status-button" style="background-color: red;">Not Completed</button>-->
-           
+        {% endfor %}
         </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <!--<button class="status-button" style="background-color: red;">Not Completed</button>-->
-           
-        </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <!--<button class="status-button" style="background-color: red;">Not Completed</button>-->
-           
-        </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <!--<button class="status-button" style="background-color: red;">Not Completed</button>-->
-           
-        </div>
-
-        <div class="complaint-box">
-            <h3>Switch is not working</h3>
-            <h4>Created on April 05, 2024</h4>
-            <h4>Completed on April 06, 2024</h4>
-            <p>I am facing issues with the switch in my room. it is not functioning correctly. I will be there after 1:30PM.</p>
-            
-            <button class="status-button" style="background-color: green;">Completed</button>
-            
-            <!--<button class="status-button" style="background-color: red;">Not Completed</button>-->
-           
-        </div>
+        {% endif %}
     </div>
-
-
-    </div>
+    
 
     <div style="width: 100%; display: flex; justify-content: space-between; margin-top: 80px; padding-left: 50px; padding-right: 50px;">
         <!-- Text Div -->
@@ -263,13 +204,18 @@
                 
                 </div>
                 <hr>
-                <form id="complaint-form">
-                    <label for="name"></label>
-                    <input type="text" id="name" name="name" required placeholder="Enter complaint name">
-    
-                    <label for="roomno"></label>
-                    <input type="text" id="roomno" name="roomno" required placeholder="Enter your room no">
-    
+                <form action="/lodgecomplaint" id="complaint-form" method="post">
+                    {% csrf_token %}
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="" disabled selected>Select complaint category</option>
+                        <option value="1">Electricity (light, fan, switch)</option>
+                        <option value="2">Ethernet and WIFI issues</option>
+                        <option value="3">Water-cooler and water-quality issues</option>
+                        <option value="4">Plumbing (geyser, tap, flush)</option>
+                    </select>
+                    <label for="id"></label>
+                    
                     <label for="complaint"></label>
                     <p>Tell us about your grievance</p>
                     <textarea id="complaint" name="complaint" rows="4" required></textarea>
@@ -279,21 +225,5 @@
             </div>
         </div>
     </div>
-    <script>
-       // script.js
-        document.getElementById('complaint-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const complaint = document.getElementById('complaint').value;
-
-            // You can handle form submission here (e.g., send data to a server).
-            console.log('Name:', name);
-            console.log('Email:', email);
-            console.log('Complaint:', complaint);
-        });
- 
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
