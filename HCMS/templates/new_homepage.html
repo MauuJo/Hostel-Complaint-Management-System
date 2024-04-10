@@ -44,7 +44,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: #FF953F;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -102,9 +102,9 @@
         }
 
         .intro-box-container{
-            margin-left:20px;
-            margin-right:20px;
-            margin-top: 50px;
+            margin-left:60px;
+            margin-right:60px;
+            margin-top: 30px;
         }
 
         .image-container {
@@ -144,6 +144,7 @@
         #sign-in button {
             padding: 10px 20px;
             font-size: 18px;
+            <!--background-color: #ff9f43;--> /* Light orange button */
             color: white;
             border: none;
             border-radius: 5px;
@@ -163,9 +164,10 @@
         }
         
         .contact-container {
-            background-color: lightblue;
+            background-color: #FF953F;
             width: 100%;
             padding: 20px;
+            margin: 0;
         }
         
         .contact-section {
@@ -177,6 +179,7 @@
         .contact-details {
             display: flex;
             justify-content: space-between;
+            padding-top:20px;
         }
         
         .left-details,
@@ -195,6 +198,16 @@
         
         .contact-section ul li {
             margin-bottom: 5px;
+        }
+
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height:90px;
+            background-color:#FF953F;
+            padding-left: 40px;
+            /* Add styles for your fixed bottom div */
         }
         
         
@@ -238,51 +251,79 @@
         </p>
       </div>
 
-      <div class="image-container">
-        <div>
-            <img src="../../images/1.jpg" alt="Image 1">
-            <p>Efficient complaint submission and tracking</p>
+
+      <div style="width: 100%; display: flex; justify-content: space-between; margin-top: 50px; padding-left: 100px; padding-right: 100px;">
+        <!-- Text Div -->
+        <div style="width: calc(50% - 50px);">
+            
+
+            <p style=" width: 350px;">
+                <img src="C:\Users\mansi\OneDrive\Desktop\complaint_track.png" alt="Efficient complaint Icon" style="width: 45px; height: 45px; float: left; margin-right: 10px;">
+                Efficient complaint submission and tracking.
+            </p>
+            
+                
+
+            <p style="width: 350px;">
+                <img src="C:\Users\mansi\OneDrive\Desktop\automated_assig.png" alt="Auto assignment Icon" style="width: 45px; height: 45px; float: left; margin-right: 10px;">
+                Automated assignment of complaints to relevant staff.
+            </p>
+            
+            <p style=" width: 350px;">
+                <img src="C:\Users\mansi\OneDrive\Desktop\realtime.png" alt="Real time update Icon" style="width: 45px; height: 45px; float: left; margin-right: 10px;">
+                Real-time updates and notifications for residents.
+            </p>
+            
+            <p style=" width: 350px;">
+                <img src="C:\Users\mansi\OneDrive\Desktop\centralized_database.png" alt="Centralized database Icon" style="width: 45px; height: 45px; float: left; margin-right: 10px;">
+                Centralized database for easy access to complaint history.
+            </p>
+            
+                
+                
+            </div>
+        
+        
+        <!-- Container for Submitting Complaint -->
+        <div id="sign-in" style="height: 180px; padding: 20px; background-color: #f0f8ff; border-radius: 10px; box-shadow: 0px 0px 10px 2px #FFCC85; ">
+            <h2>Sign in as</h2>
+            <button onclick="redirectToNewPage()">Student</button>
+            <button onclick="redirectToNewPage_staff()">Staff</button>
         </div>
-        <div>
-            <img src="../../images/2.jpg" alt="Image 2">
-            <p>Automated assignment of complaints to relevant staff</p>
-        </div>
-        <div>
-            <img src="../../images/3.jpg" alt="Image 3">
-            <p>Real-time updates and notifications for residents</p>
-        </div>
-        <div>
-            <img src="../../images/4.jpg" alt="Image 4">
-            <p>Centralized database for easy access to complaint history</p>
-        </div>
+
+        
+        
+            
     </div>
 
-    <div id="sign-in">
-        <h2>Sign in as</h2>
-        <button onclick="redirectToNewPage()">Student</button>
-        <button onclick="redirectToNewPage_staff()">Staff</button>
-    </div>
+
+
+      
 
     
-        <div class="contact-container">
-            <div>
-                <h2>Contact Us</h2>
+
+        
+        
+            <div class="fixed-bottom">
+                
                 <div class="contact-details">
                     <div class="left-details">
                         <ul>
-                            <li><strong>Address:</strong> 123 Main Street, City, Country</li>
-                            <li><strong>Phone:</strong> +1234567890</li>
+                            <h4 style="padding-left: 10px; margin-bottom: 5px;">Contact Us</h4>
+                            <p style="padding-left: 10px; font-style: italic; font-family: Arial, sans-serif;">We're here to help. Reach out anytime!</p>
+                        
+                            
                         </ul>
                     </div>
                     <div class="right-details">
                         <ul>
+                            <li><strong>Phone:</strong> +1234567890</li>
                             <li><strong>Email:</strong> example@example.com</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    
+        
     
     
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -90,3 +90,190 @@
 
 </body>
 </html>  
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+        
+        .login-form {
+            background-color: #ffffff;
+            padding: 40px; /* Increased padding */
+            border-radius: 20px; /* Increased border radius */
+            width: 300px; /* Increased width */
+        }
+        
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-container input {
+            width: calc(100% - 40px); /* Adjusted width for input to accommodate icon */
+            padding-left: 35px;
+            padding-top:15px;
+            padding-bottom:15px;
+            border-radius: 20px;
+            border: 1px solid #000000;
+            outline: none;
+        }
+        
+        .input-container .icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px; /* Adjusted left position */
+        }
+        
+        .input-container .icon img {
+            height: 20px; /* Adjusted height */
+            width: auto; /* Adjusted width to maintain aspect ratio */
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #FF953F;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .lexend-font {
+            font-family: 'Lexend', sans-serif;
+            /* Additional styling properties if needed */
+        }
+
+        .back-button {
+            width: 100px;
+            
+            background-color: #FF953F;
+            color: #ffffff; /* White color for the text */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .right-align {
+            text-align: right; /* Align content to the right */
+            padding-right: 20px;
+            padding-top:20px;
+        }
+        .switch-link {
+            color: #FF953F;
+            text-decoration: underline;
+        }
+        .switch-link:hover {
+            color: blue;
+        }
+
+        .alert {
+            background-color: #FFCDD2; /* pastel red */
+            color: #000000; /* text color */
+            display: flex; /* Enable flexbox layout */
+            align-items: center; /* Align items vertically */
+            justify-content: space-between; /* Space between items */
+            padding-right: 30px; /* Add space for the button */
+        }
+    
+        .close {
+            width: 10px;
+            height: 10px;
+            border-radius: 0px;
+            background-color: #FFCDD2;
+            transition: none; /* Prevent color change on hovering */
+            flex-shrink: 0; /* Don't allow the button to shrink */
+        }
+    
+        .right-align_close {
+            display: flex; /* Enable flexbox layout */
+            align-items: center; /* Align items vertically */
+        }
+        
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Tilt+Prism&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
+            <div>{{ message }}</div> <!-- Align text with the button -->
+            <div class="right-align">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <div class="right-align">
+    <button class="back-button" >Back</button>
+    </div>
+    <div class="login-container">
+        <form class="login-form" style="box-shadow: 0px 0px 10px 2px #FFCC85;" action="/login_staff" method="post">
+            {% csrf_token %}
+            <p class="lexend-font" style="text-align:center;padding-bottom:10px;font-weight:bold;font-size:24px;font-weight:500;">STUDENT LOGIN</p>
+            <div class="input-container">
+                <span class="icon"><img src="C:\Users\mansi\OneDrive\Desktop\userprofile.jpeg" alt="User Icon"></span>
+                <label for="id"></label>
+                <input type="text" id="id" name="id" placeholder="Enter your id">
+            </div>
+            <div class="input-container">
+                <label for="password"></label>
+                <input type="password" id="password" name="password" placeholder="password">
+                <span class="icon"><img src="C:\Users\mansi\OneDrive\Desktop\password.jpeg" alt="Password Icon"></span>
+            </div>
+            <button type="submit">Login</button>
+
+            <p style="text-align:center">Don't have an account? 
+                <a href="/signupstaff" class="switch-link">Create an account</a>
+            </p>
+        </form>
+        
+    </div>
+
+    <script>
+        // Get the elements with the class "alert" and iterate over them
+        document.querySelectorAll('.alert').forEach(function(alertElement) {
+            // Add event listener to each alert for when it is closed
+            alertElement.querySelector('.close').addEventListener('click', function() {
+                // Hide the alert when the close button is clicked
+                alertElement.style.display = 'none';
+            });
+        });
+    </script>
+    
+</body>
+</html>

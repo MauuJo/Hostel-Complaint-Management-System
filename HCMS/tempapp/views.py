@@ -90,7 +90,7 @@ def signup(request):
         sample2.is_active=True
         sample2.save()
         transaction.commit()
-        #messages.success(request,"Account created successfully, please login")
+        messages.success(request,"Account created successfully, please login")
         return redirect('/login')  # Redirect to a success page after successful signup
     return render(request, 'signup_student.html')
 
@@ -110,7 +110,7 @@ def signupstaff(request):
         sample2.is_active=True
         sample2.save()
         transaction.commit()
-        #messages.success(request,"Account created successfully, please login")
+        messages.success(request,"Account created successfully, please login")
         return redirect('/login_staff')  # Redirect to a success page after successful signup
     return render(request, 'signup_staff.html')
 

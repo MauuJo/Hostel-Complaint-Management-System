@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,5 +80,172 @@
             </form> 
         </p>        
     </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+        
+        .login-form {
+            background-color: #ffffff;
+            padding: 40px; /* Increased padding */
+            border-radius: 20px; /* Increased border radius */
+            width: 300px; /* Increased width */
+        }
+        
+        .input-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .input-container input {
+            width: calc(100% - 40px); /* Adjusted width for input to accommodate icon */
+            padding-left: 35px;
+            padding-top:5px;
+            padding-bottom:5px;
+            border-radius: 20px;
+            border: 1px solid #000000;
+            outline: none;
+        }
+        
+        
+        
+        .input-container .icon img {
+            height: 10px; /* Adjusted height */
+            width: auto; /* Adjusted width to maintain aspect ratio */
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #FF953F;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .lexend-font {
+            font-family: 'Lexend', sans-serif;
+            /* Additional styling properties if needed */
+        }
+
+        .back-button {
+            width: 100px;
+            
+            background-color: #FF953F;
+            color: #ffffff; /* White color for the text */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .right-align {
+            text-align: right; /* Align content to the right */
+            padding-right: 20px;
+            padding-top:20px;
+        }
+        .switch-link {
+            color: #FF953F;
+            text-decoration: underline;
+        }
+        .switch-link:hover {
+            color: blue;
+        }
+
+        .dropdown_select {
+            width: calc(100% - 0px); /* Adjusted width for input to accommodate icon */
+            padding-left: 35px;
+            padding-top:5px;
+            padding-bottom:5px;
+            border-radius: 20px;
+            border: 1px solid #000000;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        
+
+        
+
+        
+        
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Tilt+Prism&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="right-align">
+    <button class="back-button" >Back</button>
+    </div>
+    <div class="login-container">
+        <form class="login-form" style="box-shadow: 0px 0px 10px 2px #FFCC85;">
+            <p class="lexend-font" style="text-align:center;padding-bottom:10px;font-weight:bold;font-size:24px;font-weight:500;">STUDENT SIGNUP</p>
+            <div class="input-container">
+                <input type="text" placeholder="User ID">
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="Full Name">
+            </div>
+            <div class="input-container">
+                <input type="password" placeholder="Email">
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="Phone number">
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="Password">
+            </div>
+            <div>
+                <select class="dropdown_select" id="hostel" name="hostel" required >
+                    <option value="" disabled selected hidden>Hostel</option>
+                    <option value="1">Gargi</option>
+                    <option value="2">B-Block</option>
+                    <option value="3">A-Block</option>
+                </select>
+            </div>
+            
+            <div class="input-container">
+                <input type="text" placeholder="Room number">
+            </div>
+            <button type="submit">Signup</button>
+
+            <p style="text-align:center">Have an account? 
+                <a href="/signup" class="switch-link">Login to account</a>
+            </p>
+        </form>
+        
+    </div>
+
+    
 </body>
 </html>
