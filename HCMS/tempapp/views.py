@@ -1,20 +1,15 @@
-from django.shortcuts import render, HttpResponse,redirect
+from django.shortcuts import render, HttpResponse,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from .models import staff, student, hostel, category, complaint
 from django.contrib import messages
+from datetime import datetime
 
 # Create your views here
 from django.db import transaction
 
 def home(request):
     return render(request,'new_homepage.html')
-
-def index(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-    return render(request, 'index.html')
-    #return HttpResponse("this is homepage")
 
 def loginUser_asStudent(request):
     if request.method == "POST":
@@ -156,7 +151,37 @@ def checkcomplaint(request):
 
 
 
+def studentacc(request):
+    return render(request,'student_profile.html')
 
 
+def staffacc(request):
+    return render(request,'staff_profile.html')
 
 
+def updatestatus(request):
+    c_id = request.GET.get('complaint_id')
+    entry = get_object_or_404(complaint, pk=c_id)
+    # Perform any additional logic or processing here
+    entry.status=1
+    entry.resolved_at = datetime.now()
+    entry.save()
+
+    staff_obj = staff.objects.get(staff_id = entry.staff.staff_id)
+    staff_obj.count -= 1
+    staff_obj.save()
+    return redirect('/checkcomplaint')
+
+def delete_by_student(request):
+    c_id = request.GET.get('complaint_id')
+    entry = get_object_or_404(complaint, pk=c_id)
+    entry.delete_by_student = 1
+    entry.save()
+    return redirect('/lodgecomplaint')
+
+def delete_by_staff(request):
+    c_id = request.GET.get('complaint_id')
+    entry = get_object_or_404(complaint, pk=c_id)
+    entry.delete_by_staff = 1
+    entry.save()
+    return redirect('/checkcomplaint')

@@ -202,42 +202,41 @@
 </head>
 <body>
     <div class="right-align">
-    <button class="back-button" >Back</button>
+    <button class="back-button" ><a href="/">Back</a></button>
     </div>
     <div class="login-container">
-        <form class="login-form" style="box-shadow: 0px 0px 10px 2px #FFCC85;">
+        <form class="login-form" action="/signupstaff" method="post" style="box-shadow: 0px 0px 10px 2px #FFCC85;">
+            {% csrf_token %}
             <p class="lexend-font" style="text-align:center;padding-bottom:10px;font-weight:bold;font-size:24px;font-weight:500;">STUDENT SIGNUP</p>
             <div class="input-container">
-                <input type="text" placeholder="User ID">
+                <input type="text" name='id' placeholder="User ID">
             </div>
             <div class="input-container">
-                <input type="text" placeholder="Full Name">
+                <input type="text" name='full_name' placeholder="Full Name">
             </div>
             <div class="input-container">
-                <input type="password" placeholder="Email">
+                <input type="email" name='email' placeholder="Email">
             </div>
             <div class="input-container">
-                <input type="text" placeholder="Phone number">
+                <input type="text" name='phone' placeholder="Phone number">
             </div>
             <div class="input-container">
-                <input type="text" placeholder="Password">
+                <input type="password" name='password' placeholder="Password">
             </div>
             <div>
-                <select class="dropdown_select" id="hostel" name="hostel" required >
-                    <option value="" disabled selected hidden>Hostel</option>
-                    <option value="1">Gargi</option>
-                    <option value="2">B-Block</option>
-                    <option value="3">A-Block</option>
+                <select class="dropdown_select" id="category" name="category" required >
+                    <option value="" disabled selected hidden>Category</option>
+                    <option value="1">Electricity</option>
+                    <option value="2">Ethernet</option>
+                    <option value="3">Water-cooler</option>
+                    <option value="4">Plumbing</option>
                 </select>
             </div>
             
-            <div class="input-container">
-                <input type="text" placeholder="Room number">
-            </div>
             <button type="submit">Signup</button>
 
-            <p style="text-align:center">Have an account? 
-                <a href="/signup" class="switch-link">Login to account</a>
+            <p style="text-align:center">Already have an account? 
+                <a href="/login_staff" class="switch-link">Login to account</a>
             </p>
         </form>
         

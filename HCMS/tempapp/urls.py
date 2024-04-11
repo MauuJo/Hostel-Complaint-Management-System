@@ -20,12 +20,16 @@ from tempapp import views
 
 urlpatterns = [
     path("",views.home,name="home"),
-    path("index",views.index,name="index"),
     path("login", views.loginUser_asStudent, name='login'),
     path("login_staff", views.loginUser_asStaff, name='login_staff'),
     path("logout",views.logoutUser,name="logout"),
     path("signup",views.signup,name="signup"),
     path("signupstaff",views.signupstaff,name="signupstaff"),
+    path("updatestatus",views.updatestatus,name='updatestatus'),
     path("lodgecomplaint",views.lodgecomplaint,name="lodgecomplaint"),
     path("checkcomplaint",views.checkcomplaint,name="checkcomplaint"),
+    path("studentacc", views.studentacc,name='studentacc'),
+    path("staffacc", views.staffacc,name='staffacc'),
+    path("delete_by_student", views.delete_by_student,name='delete_by_student'),
+    path("delete_by_staff", views.delete_by_staff,name='delete_by_staff'),
 ]

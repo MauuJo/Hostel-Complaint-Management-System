@@ -66,6 +66,7 @@ class staff(models.Model):
     phone = models.CharField(max_length=20)
     password = models.CharField(max_length=255)  # Consider using Django's built-in authentication system
     category = models.ForeignKey(category, on_delete=models.CASCADE)
+    count = models.IntegerField(default=0)
     class Meta:
         db_table='staff'
 
@@ -100,5 +101,7 @@ class complaint(models.Model):
     status = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     resolved_at = models.DateTimeField(null=True, blank=True)
+    delete_by_student = models.IntegerField(default=0)
+    delete_by_staff = models.IntegerField(default=0)
     class Meta:
         db_table='complaint'

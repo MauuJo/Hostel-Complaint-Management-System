@@ -118,7 +118,7 @@
             <div>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: black;">Account</a>
+                        <a class="nav-link" href="/studentacc" style="color: black;">Account</a>
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-outline-success" type="submit" > <a href="/logout">Logout</a></button>
@@ -143,6 +143,7 @@
         {% else %}
         <div class="complaint-box-container">
         {% for complaint in complaints %}
+        {% if complaint.delete_by_student == 0 %}
         <div class="complaint-box">
             
             <h4>{{ complaint.category }}</h4>
@@ -150,10 +151,12 @@
             <p>{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: green;">Completed</button>
+            <button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_student' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>
             {% else %}
             <button class="status-button" style="background-color: red;">Not Completed</button>
             {% endif %}
         </div>
+        {% endif %}
         {% endfor %}
         </div>
         {% endif %}
@@ -174,19 +177,19 @@
                 submitted complaints, fostering a secure and 
                 comfortable living environment for all hostel residents.</p>
 
-                <p ><img src="C:\Users\mansi\Downloads\swift_reso.png" alt="Swift Grievances Redressal Icon" style="width: 25px; height: 25px;margin-right:10px;">Swift Grievance Resolution</p>
+                <p ><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/swift_reso.png?raw=true" alt="Swift Grievances Redressal Icon" style="width: 25px; height: 25px;margin-right:10px;">Swift Grievance Resolution</p>
 
                 <p style="margin-left:35px;">Swift grievance resolution prioritizes timely 
                 and effective solutions, ensuring students' 
                 concerns are promptly addressed and resolved.</p>
 
-                <p><img src="C:\Users\mansi\Downloads\confi.png" alt="Confidentiality Assured Icon" style="width: 25px; height: 25px;margin-right:10px;">Confidentiality Assured</p>
+                <p><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/confi.png?raw=true" alt="Confidentiality Assured Icon" style="width: 25px; height: 25px;margin-right:10px;">Confidentiality Assured</p>
 
                 <p style="margin-left:35px;">Your grievances are handled with utmost confidentiality, 
                 ensuring privacy and trust throughout the hostel grievance 
                 redressal process.</p>
 
-                <p><img src="C:\Users\mansi\Downloads\easy_com.png" alt="Easy Communication Icon" style="width: 25px; height: 25px;margin-right:10px;">Easy Communication</p>
+                <p><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/easy_com.png?raw=true" alt="Easy Communication Icon" style="width: 25px; height: 25px;margin-right:10px;">Easy Communication</p>
 
                 <p style="margin-left:35px;">Effortless communication is facilitated, providing 
                 a smooth and accessible channel for expressing and 

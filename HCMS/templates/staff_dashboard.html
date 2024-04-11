@@ -118,7 +118,7 @@
             <div>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: black;">Account</a>
+                        <a class="nav-link" href="/staffacc" style="color: black;">Account</a>
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-outline-success" type="submit"> <a href="/logout">Logout</a></button>
@@ -143,6 +143,7 @@
         {% else %}
         <div class="complaint-box-container">
         {% for complaint in complaints %}
+        {% if complaint.delete_by_staff == 0 %}
         <div class="complaint-box">
             
             <h4>{{ complaint.category }}</h4>
@@ -150,11 +151,15 @@
             <p>{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: #5cb65c;">Completed</button>
+            <button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_staff' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>
             {% else %}
-            <button class="status-button" style="background-color: hwb(1 20% 22%) ;">Not Completed</button>
+            <h4>Status: Assigned</h4>
+            <button class="status-button" style="background-color: hwb(1 20% 22%) ;"><a href="{% url 'updatestatus' %}?complaint_id={{complaint.id}}" style="color: white;">Update To Completed</a></button>
             {% endif %}
-            <button class="status-button" style="background-color: hsl(195, 56%, 62%);">Delete</button>
+
+            
         </div>
+        {% endif %}
         {% endfor %}
         </div>
         {% endif %}
