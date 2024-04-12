@@ -97,11 +97,18 @@
         }
         
         .detail-value {
-            flex: 2;
+            flex: 1;
             text-align: right;
-            margin-left: 10px;
         }
         
+        .detail-name {
+            flex: 1;
+        }
+        
+        .detail-value {
+            flex: 2;
+            margin-left: 10px;
+        }
         
         
 
@@ -118,7 +125,8 @@
             <div class="nav_bar" style="margin-top: 20px;">
                 <ul >
                     
-                        <button onclick="redirectToNewPage_staff_dashboard()">Back</button>
+                        <button onclick="redirectToNewPage_student_dashboard()">Back</button>
+                    
                     
                         <button  onclick="redirectToNewPage_home()">Logout</button>
                     
@@ -128,36 +136,61 @@
       </nav>
 
     
-      <div style="text-align:left;margin-top: 50px;">
-        <p style="font-size:20px; font-weight:500; margin-top:20px;margin-left: 70px;">Profile</p>
-    </div>
+      
+        
+            <div style="text-align:left;margin-top: 50px;">
+                <p style="font-size:20px; font-weight:500; margin-top:20px;margin-left: 70px;">Edit Profile</p>
+            </div>
+    
+            <form id="edit_student_profile" action="/updatestudent" method="POST">
+            {% csrf_token %}
+            <div class="student-details-box">
+                <div class="student-detail">
+                    <span class="detail-name">Name:</span>
+                    <!--<span class="detail-value">John Doe</span>-->
+                    <input type="text" class="detail-value" name="name" value="{{student.full_name}}" required>
+                </div>
+                <div class="student-detail">
+                    <span class="detail-name">Email:</span>
+                    <!--<span class="detail-value">john@gmail.com</span>-->
+                    <input type="email" class="detail-value" name="email" value="{{student.email}}" required>
 
-    <div class="student-details-box">
-        <div class="student-detail">
-            <span class="detail-name">Name:</span>
-            <span class="detail-value">{{staff.full_name}}</span>
-        </div>
-        <div class="student-detail">
-            <span class="detail-name">Email:</span>
-            <span class="detail-value">{{staff.email}}</span>
-
-        </div>
-        <div class="student-detail">
-            <span class="detail-name">Contact Number:</span>
-            <span class="detail-value">{{staff.phone}}</span>
-        </div>
-        <div class="student-detail" style="border: 0px solid #ccc;">
-            <span class="detail-name">Category:</span>
-            <span class="detail-value">{{staff.category.category_name}}</span>
-        </div>
-        <!-- Add more details here as needed -->
-    </div>
-
-    <button type="submit" style="margin-left:25px;margin-left: 70px;" onclick="redirectToNewPage_editstaff()">Edit Profile</button>
+                </div>
+                <div class="student-detail">
+                    <span class="detail-name">Contact Number:</span>
+                    <!--<span class="detail-value">7689034562</span>-->
+                    <input type="tel" class="detail-value" name="contact" value="{{student.phone}}" required>
+                </div>
+                <div class="student-detail">
+                    <span class="detail-name">Hostel:</span>
+                    <!--<span class="detail-value">Gargi</span>-->
+                    <select class="detail-value" id="hostel" name="hostel" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
+                        <option value="{{student.hostel.hostel_id}}" disabled selected hidden>{{student.hostel.hostel_name}}</option>
+                        <option value="1">Gargi</option>
+                        <option value="2">Maitri</option>
+                        <option value="3">Vinodini</option>
+                    </select>
+                </div>
+                <div class="student-detail" style="border: 0px solid #ccc;">
+                    <span class="detail-name">Room no:</span>
+                    <!--<span class="detail-value">306</span>-->
+                    <input type="text" class="detail-value" name="room" value="{{student.room_no}}" required>
+                </div>
+                <!-- Add more details here as needed -->
+            
+            </div>
+            <div><button style="width:100px; margin-left: 70px;" type="submit">Save</button></div>
+            
+         
+        </form>
+    
+        
+    
+    
 
     <script>
-        function redirectToNewPage_staff_dashboard() {
-          window.location.href = "/checkcomplaint";
+        function redirectToNewPage_student_dashboard() {
+          window.location.href = "/lodgecomplaint";
         }
       </script>
       <script>
@@ -165,11 +198,6 @@
           window.location.href = "/";
         }
     </script>
-    <script>
-        function redirectToNewPage_editstaff() {
-          window.location.href = "/editstaff";
-        }
-      </script>
     
     
 

@@ -145,40 +145,28 @@
             <div class="student-details-box">
                 <div class="student-detail">
                     <span class="detail-name">Name:</span>
-                    <!--<span class="detail-value">John Doe</span>-->
-                    <input type="text" class="detail-value" name="name" value="John Doe" required>
+                    <span class="detail-value"> {{student.full_name}} </span>
                 </div>
                 <div class="student-detail">
                     <span class="detail-name">Email:</span>
-                    <!--<span class="detail-value">john@gmail.com</span>-->
-                    <input type="email" class="detail-value" name="email" value="john@gmail.com" required>
-
+                    <span class="detail-value">{{student.email}}</span>
                 </div>
                 <div class="student-detail">
                     <span class="detail-name">Contact Number:</span>
-                    <!--<span class="detail-value">7689034562</span>-->
-                    <input type="tel" class="detail-value" name="contact" value="7689034562" required>
+                    <span class="detail-value">{{student.phone}}</span>
                 </div>
                 <div class="student-detail">
                     <span class="detail-name">Hostel:</span>
-                    <!--<span class="detail-value">Gargi</span>-->
-                    <select class="detail-value" id="hostel" name="hostel" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
-                        <option value="" disabled selected hidden></option>
-                        <option value="1">Gargi</option>
-                        <option value="2">Maitri</option>
-                        <option value="3">Vinodini</option>
-                    </select>
+                    <span class="detail-value">{{student.hostel.hostel_name}}</span>
                 </div>
                 <div class="student-detail" style="border: 0px solid #ccc;">
                     <span class="detail-name">Room no:</span>
-                    <!--<span class="detail-value">306</span>-->
-                    <input type="text" class="detail-value" name="room" value="306" required>
+                    <span class="detail-value">{{student.room_no}}</span>
                 </div>
                 <!-- Add more details here as needed -->
             </div>
     
-            <button type="submit" style="margin-left:25px;margin-left: 70px;">Edit Profile</button>
-            <button style="width:100px;" type="submit">Save</button>
+            <button type="submit" style="margin-left:25px;margin-left: 70px;" onclick="redirectToNewPage_editstudent()">Edit Profile</button>
         
     
         
@@ -195,6 +183,11 @@
           window.location.href = "/";
         }
     </script>
+    <script>
+        function redirectToNewPage_editstudent() {
+          window.location.href = "/editstudent";
+        }
+      </script>
     
     
 

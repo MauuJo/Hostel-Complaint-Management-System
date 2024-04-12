@@ -32,4 +32,8 @@ urlpatterns = [
     path("staffacc", views.staffacc,name='staffacc'),
     path("delete_by_student", views.delete_by_student,name='delete_by_student'),
     path("delete_by_staff", views.delete_by_staff,name='delete_by_staff'),
+    path("editstudent", views.edit_student,name='editstudent'),
+    path("updatestudent", views.update_student,name='updatestudent'),
+    path("editstaff", views.edit_staff,name='editstaff'),
+    path("updatestaff", views.update_staff,name='updatestaff'),
 ]

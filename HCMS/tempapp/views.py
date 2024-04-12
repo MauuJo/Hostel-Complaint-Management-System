@@ -30,11 +30,11 @@ def loginUser_asStudent(request):
                 request.session['username'] = username
                 return redirect('/lodgecomplaint')
             else:
-                #messages.error(request, "Invalid username or password")
-                pass
+                messages.error(request, "Invalid username or password")
+                return redirect('/login')
         else:
-            #messages.error(request, "User does not exist")
-            pass
+            messages.error(request, "User does not exist")
+            return redirect('/login')
     return render(request, 'login.html')
 
 def loginUser_asStaff(request):
@@ -56,11 +56,11 @@ def loginUser_asStaff(request):
                 request.session['username'] = username
                 return redirect('/checkcomplaint')
             else:
-                #messages.error(request, "Invalid username or password")
-                pass
+                messages.error(request, "Invalid username or password")
+                return redirect('/login_staff')
         else:
-            #messages.error(request, "User does not exist")
-            pass
+            messages.error(request, "User does not exist")
+            return redirect('/login_staff')
     return render(request, 'loginstaff.html')
 
 def logoutUser(request):
@@ -150,13 +150,22 @@ def checkcomplaint(request):
     return render(request,'staff_dashboard.html',context)
 
 
-
 def studentacc(request):
-    return render(request,'student_profile.html')
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    context={
+                'student': student_object
+            }
+    return render(request,'student_profile.html',context)
 
 
 def staffacc(request):
-    return render(request,'staff_profile.html')
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    context={
+                'staff': staff_object
+            }
+    return render(request,'staff_profile.html',context)
 
 
 def updatestatus(request):
@@ -185,3 +194,51 @@ def delete_by_staff(request):
     entry.delete_by_staff = 1
     entry.save()
     return redirect('/checkcomplaint')
+
+def edit_student(request):
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    context={
+                'student': student_object
+            }
+    return render(request,'edit_student.html',context)
+
+def update_student(request):
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    if request.method == "POST":
+        f = request.POST.get('name')
+        e = request.POST.get('email')
+        p = request.POST.get('contact')
+        h = request.POST.get('hostel')
+        r = request.POST.get('room')
+
+        student_object.full_name=f
+        student_object.email=e
+        student_object.phone=p
+        student_object.hostel=hostel.objects.get(hostel_id=h)
+        student_object.room_no=r
+        student_object.save()
+    return redirect('/studentacc')
+
+def edit_staff(request):
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    context={
+                'staff': staff_object
+            }
+    return render(request,'edit_staff.html',context)
+
+def update_staff(request):
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    if request.method == "POST":
+        f = request.POST.get('name')
+        e = request.POST.get('email')
+        p = request.POST.get('contact')
+
+        staff_object.full_name=f
+        staff_object.email=e
+        staff_object.phone=p
+        staff_object.save()
+    return redirect('/staffacc')
