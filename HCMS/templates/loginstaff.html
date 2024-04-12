@@ -194,7 +194,7 @@
         }
 
         .alert {
-            background-color: #FFCDD2; /* pastel red */
+            background-color: #74B72E; /* pastel red */
             color: #000000; /* text color */
             display: flex; /* Enable flexbox layout */
             align-items: center; /* Align items vertically */
@@ -203,13 +203,24 @@
         }
     
         .close {
-            width: 10px;
-            height: 10px;
-            border-radius: 0px;
-            background-color: #FFCDD2;
-            transition: none; /* Prevent color change on hovering */
-            flex-shrink: 0; /* Don't allow the button to shrink */
+            width: 30px; /* Increase width */
+            height: 25px; /* Increase height */
+            margin: 0 0 15px 0; /* Remove margin */
+            padding: 0; /* Remove padding */
+            border: none; /* Remove border */
+            background-color: transparent; /* Transparent background */
+            font-size: 40px; /* Increase font size */
+            line-height: 1; /* Ensure proper alignment */
+            position: relative; /* Position the button */
         }
+        
+        .close span {
+            position: absolute; /* Position the cross */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the cross */
+        }
+        
     
         .right-align_close {
             display: flex; /* Enable flexbox layout */
@@ -227,19 +238,20 @@
 
     {% if messages %}
     {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
-            <div>{{ message }}</div> <!-- Align text with the button -->
-            <div class="right-align">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
+        <div>{{ message }}</div> <!-- Align text with the button -->
+        <div class="right-align">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background-color: transparent;">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
+    </div>
     {% endfor %}
 {% endif %}
 
     <div class="right-align">
-    <button class="back-button" ><a href="/">Back</a></button>
+    <button class="back-button" onclick="redirectToNewPage_home()">Back</button>
+    
     </div>
     <div class="login-container">
         <form class="login-form" style="box-shadow: 0px 0px 10px 2px #FFCC85;" action="/login_staff" method="post">
@@ -274,6 +286,12 @@
             });
         });
     </script>
+
+    <script>
+        function redirectToNewPage_home() {
+          window.location.href = "/";
+        }
+      </script>
     
 </body>
 </html>

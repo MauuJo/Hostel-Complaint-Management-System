@@ -44,7 +44,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: #FF953F;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -100,6 +100,27 @@
             display: flex; 
             flex-wrap: wrap; 
         }
+
+        a.button-link {
+            text-decoration: none;
+        }
+
+        a.button-link button {
+            display: inline-block; /* Ensure the button behaves like a block-level element */
+            padding: 10px 20px; /* Adjust padding as needed */
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Button border radius */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
+        
+        
+
+        a.button-link .button-text {
+            pointer-events: none; /* Prevent the text from being clickable */
+        }
         
 
         
@@ -114,22 +135,23 @@
 <body style="margin-bottom:100px;background-color: #F0F0F0;">
     <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="background-color: #e0e0e0; padding-left: 50px; padding-right: 50px; width: 100%; height:80px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">MNIT Hostels</a>
-            <div>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/studentacc" style="color: black;">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-success" type="submit" > <a href="/logout">Logout</a></button>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">Hostel Complaint Redressal System</a>
+          <div class="nav_bar" style="margin-top: 20px;">
+            <ul >
+                
+                    <button onclick="redirectToNewPage_student_profile()">Account</button>
+                
+                
+                    <button  onclick="redirectToNewPage_home()">Logout</button>
+                
+            </ul>
+        </div>
         </div>
       </nav>
     
 
     <div style="width: 100%; text-align:left; padding-left:25px;">
+        <div style="margin-left:40px;">
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Welcome {{name}}</p>
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
         <!-- Check if complaints exist -->
@@ -139,6 +161,7 @@
         <div>
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
             <p>No complaints registered yet</p>
+        </div>
         </div>
         {% else %}
         <div class="complaint-box-container">
@@ -151,7 +174,10 @@
             <p>{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: green;">Completed</button>
-            <button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_student' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>
+            <!--<button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_student' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>-->
+            <a href="{% url 'delete_by_student' %}?complaint_id={{complaint.id}}" style="color: white;" class="button-link">
+                <span class="status-button" style="background-color: hsl(195, 56%, 62%);">Delete</span>
+            </a>
             {% else %}
             <button class="status-button" style="background-color: red;">Not Completed</button>
             {% endif %}
@@ -165,8 +191,8 @@
 
     <div style="width: 100%; display: flex; justify-content: space-between; margin-top: 80px; padding-left: 50px; padding-right: 50px;">
         <!-- Text Div -->
-        <div style="width: calc(50% - 50px);">
-            <p style="color:blue;">Hostel Grievance Redressal</p>
+        <div style="width: calc(50% - 50px);margin-left:15px;">
+            
             <h4 style="text-align: left;">Submit Your Grievance</h4>
             <div style="text-align: left;">
                 
@@ -177,21 +203,21 @@
                 submitted complaints, fostering a secure and 
                 comfortable living environment for all hostel residents.</p>
 
-                <p ><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/swift_reso.png?raw=true" alt="Swift Grievances Redressal Icon" style="width: 25px; height: 25px;margin-right:10px;">Swift Grievance Resolution</p>
+                <p style="color:#CD4D4D"><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/swift_reso.png?raw=true" alt="Swift Grievances Redressal Icon" style="width: 50px; height: 50px;margin-right:10px;float: left;">Swift Grievance Resolution</p>
 
-                <p style="margin-left:35px;">Swift grievance resolution prioritizes timely 
+                <p style="margin-left:60px;margin-top:-10px;">Swift grievance resolution prioritizes timely 
                 and effective solutions, ensuring students' 
                 concerns are promptly addressed and resolved.</p>
+                
+                <p style="color:#CD4D4D"><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/confi.png?raw=true" alt="Confidentiality Assured Icon" style="width: 50px; height: 50px;margin-right:10px;float: left;">Confidentiality Assured</p>
 
-                <p><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/confi.png?raw=true" alt="Confidentiality Assured Icon" style="width: 25px; height: 25px;margin-right:10px;">Confidentiality Assured</p>
-
-                <p style="margin-left:35px;">Your grievances are handled with utmost confidentiality, 
+                <p style="margin-left:60px;margin-top:-10px;">Your grievances are handled with utmost confidentiality, 
                 ensuring privacy and trust throughout the hostel grievance 
                 redressal process.</p>
 
-                <p><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/easy_com.png?raw=true" alt="Easy Communication Icon" style="width: 25px; height: 25px;margin-right:10px;">Easy Communication</p>
+                <p style="color:#CD4D4D"><img src="https://github.com/MauuJo/Hostel-Complaint-Management-System/blob/main/images/easy_com.png?raw=true" alt="Easy Communication Icon" style="width: 50px; height: 50px;margin-right:10px;float: left;">Easy Communication</p>
 
-                <p style="margin-left:35px;">Effortless communication is facilitated, providing 
+                <p style="margin-left:60px;margin-top:-10px;">Effortless communication is facilitated, providing 
                 a smooth and accessible channel for expressing and 
                 resolving grievances within the hostel community.</p>
                 
@@ -200,7 +226,7 @@
         
         <!-- Container for Submitting Complaint -->
         <div style="width: calc(50% - 10px); ">
-            <div class="container" style="text-align:left;box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); padding-left:15px; padding-right:15px;width: 450px;">
+            <div class="container" style="text-align:left;box-shadow: 0px 0px 10px 2px #FFCC85; padding-left:25px; padding-right:25px;width: 450px;padding-bottom:25px;">
                 <div style="padding-left:20px;">
                 <p style="font-size:30px; font-weight:400; margin-top:20px;margin-bottom:0px;">Submit Complaint</p>
                 <p style="margin-top:0px;">Contact us for hostel grievance redressal</p>
@@ -228,5 +254,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function redirectToNewPage_student_profile() {
+          window.location.href = "/studentacc";
+        }
+      </script>
+      <script>
+        function redirectToNewPage_home() {
+          window.location.href = "/";
+        }
+    </script>
 </body>
 </html>

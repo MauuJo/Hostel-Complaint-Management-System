@@ -205,7 +205,8 @@
 </head>
 <body>
     <div class="right-align">
-    <button class="back-button" ><a href="/">Back</a></button>
+        <button class="back-button" onclick="redirectToNewPage_home()">Back</button>
+        
     </div>
     <div class="login-container">
         <form class="login-form" action="/signup" method="post" style="box-shadow: 0px 0px 10px 2px #FFCC85;">
@@ -247,6 +248,11 @@
         
     </div>
 
+    <script>
+        function redirectToNewPage_home() {
+          window.location.href = "/";
+        }
+      </script>
     
 </body>
 </html>

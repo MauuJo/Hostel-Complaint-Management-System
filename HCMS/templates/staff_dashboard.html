@@ -44,7 +44,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: #FF953F;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -100,6 +100,27 @@
             display: flex; 
             flex-wrap: wrap; 
         }
+
+        a.button-link {
+            text-decoration: none;
+        }
+
+        a.button-link button {
+            display: inline-block; /* Ensure the button behaves like a block-level element */
+            padding: 10px 20px; /* Adjust padding as needed */
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Button border radius */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
+        
+        
+
+        a.button-link .button-text {
+            pointer-events: none; /* Prevent the text from being clickable */
+        }
         
 
         
@@ -114,22 +135,23 @@
 <body style="margin-bottom:100px;background-color: #F0F0F0;">
     <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="background-color: #e0e0e0; padding-left: 50px; padding-right: 50px; width: 100%; height:80px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">MNIT Hostels</a>
-            <div>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/staffacc" style="color: black;">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-success" type="submit"> <a href="/logout">Logout</a></button>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">Hostel Complaint Redressal System</a>
+          <div class="nav_bar" style="margin-top: 20px;">
+            <ul >
+                
+                    <button onclick="redirectToNewPage_student_profile()">Account</button>
+                
+                
+                    <button  onclick="redirectToNewPage_home()">Logout</button>
+                
+            </ul>
+        </div>
         </div>
       </nav>
     
 
     <div style="width: 100%; text-align:left; padding-left:25px;">
+        <div style="margin-left:40px;">
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Welcome {{name}}</p>
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
         <!-- Check if complaints exist -->
@@ -139,6 +161,7 @@
         <div>
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
             <p>No complaints registered yet</p>
+        </div>
         </div>
         {% else %}
         <div class="complaint-box-container">
@@ -151,10 +174,16 @@
             <p>{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: #5cb65c;">Completed</button>
-            <button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_staff' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>
+            <!--<button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_staff' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>-->
+            <a href="{% url 'delete_by_staff' %}?complaint_id={{complaint.id}}" style="color: white;" class="button-link">
+                <span class="status-button" style="background-color: hsl(195, 56%, 62%);">Delete</span>
+            </a>
             {% else %}
             <h4>Status: Assigned</h4>
-            <button class="status-button" style="background-color: hwb(1 20% 22%) ;"><a href="{% url 'updatestatus' %}?complaint_id={{complaint.id}}" style="color: white;">Update To Completed</a></button>
+            <!--<button class="status-button" style="background-color: hwb(1 20% 22%) ;"><a href="{% url 'updatestatus' %}?complaint_id={{complaint.id}}" style="color: white;">Update To Completed</a></button>-->
+            <a href="{% url 'updatestatus' %}?complaint_id={{complaint.id}}" style="color: white;" class="button-link">
+                <span class="status-button" style="background-color: hwb(1 20% 22%) ;">Update To Completed</span>
+            </a>
             {% endif %}
 
             
@@ -166,7 +195,16 @@
 
     </div>
 
-
+    <script>
+        function redirectToNewPage_student_profile() {
+          window.location.href = "/staacc";
+        }
+      </script>
+      <script>
+        function redirectToNewPage_home() {
+          window.location.href = "/";
+        }
+    </script>
 
 </body>
 </html>

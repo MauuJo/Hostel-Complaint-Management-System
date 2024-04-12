@@ -44,7 +44,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: #FF953F;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -56,10 +56,28 @@
             background-color: #0056b3;
         }
 
+        #nav_bar {
+            margin-top: 20px;
+        }
+
+        #nav_bar button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            width: 120px;
+        }
+
+        
+
         .student-details-box {
             width: 500px; /* Adjust width as needed */
             padding: 10px;
             margin: 20px;
+            margin-left: 70px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -79,8 +97,9 @@
         }
         
         .detail-value {
-            flex: 1;
+            flex: 2;
             text-align: right;
+            margin-left: 10px;
         }
         
         
@@ -95,57 +114,75 @@
 <body style="margin-bottom:100px;background-color: #F0F0F0;">
     <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="background-color: #e0e0e0; padding-left: 50px; padding-right: 50px; width: 100%; height:80px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">MNIT Hostels</a>
-            <div>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: black;">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-success" type="submit">Logout</button>
-                    </li>
+          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">Hostel Complaint Redressal System</a>
+            <div class="nav_bar" style="margin-top: 20px;">
+                <ul >
+                    
+                        <button onclick="redirectToNewPage_student_dashboard()">Back</button>
+                    
+                    
+                        <button  onclick="redirectToNewPage_home()">Logout</button>
+                    
                 </ul>
             </div>
         </div>
       </nav>
-    
 
-    <div style="width: 100%; text-align:left; padding-left:25px;">
-        <p style="font-size:20px; font-weight:500; margin-top:20px;">Profile</p>
-        <!-- Check if complaints exist -->
-        <!-- If no complaints, display "No complaints registered yet" -->
-        <!-- If complaints exist, display them in boxes side by side -->
-        
+    
+      <div style="text-align:left;margin-top: 50px;">
+        <p style="font-size:20px; font-weight:500; margin-top:20px;margin-left: 70px;">Profile</p>
     </div>
 
     <div class="student-details-box">
         <div class="student-detail">
             <span class="detail-name">Name:</span>
-            <span class="detail-value">John Doe</span>
+            <!--<span class="detail-value">John Doe</span>-->
+            <input type="text" class="detail-value" name="name" value="John Doe" required>
         </div>
         <div class="student-detail">
             <span class="detail-name">Email:</span>
-            <span class="detail-value">john@gmail.com</span>
+            <!--<span class="detail-value">john@gmail.com</span>-->
+            <input type="email" class="detail-value" name="email" value="john@gmail.com" required>
+
         </div>
         <div class="student-detail">
             <span class="detail-name">Contact Number:</span>
-            <span class="detail-value">7689034562</span>
+            <!--<span class="detail-value">7689034562</span>-->
+            <input type="tel" class="detail-value" name="contact" value="7689034562" required>
         </div>
         <div class="student-detail">
             <span class="detail-name">Hostel:</span>
-            <span class="detail-value">Gargi</span>
+            <!--<span class="detail-value">Gargi</span>-->
+            <input type="text" class="detail-value" name="hostel" value="Gargi" required>
         </div>
         <div class="student-detail" style="border: 0px solid #ccc;">
-            <span class="detail-name">Room no:</span>
-            <span class="detail-value">306</span>
+            <span class="detail-name">Category:</span>
+            <!--<span class="detail-value">306</span>-->
+            <select class="detail-value" id="category" name="category" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
+                <option style="" value="" disabled selected hidden></option>
+                <option value="1">Electricity</option>
+                <option value="2">Ethernet</option>
+                <option value="3">Water-cooler</option>
+                <option value="4">Plumbing</option>
+            </select>
         </div>
         <!-- Add more details here as needed -->
-
-        
     </div>
 
-    <button type="submit" style="margin-left:25px;">Back</button>
+    <button type="submit" style="margin-left:25px;margin-left: 70px;">Edit Profile</button>
+    <button style="width:100px;" type="submit">Save</button>
+    
 
+    <script>
+        function redirectToNewPage_staff_dashboard() {
+          window.location.href = "/checkcomplaint";
+        }
+      </script>
+      <script>
+        function redirectToNewPage_home() {
+          window.location.href = "/";
+        }
+    </script>
     
     
 
