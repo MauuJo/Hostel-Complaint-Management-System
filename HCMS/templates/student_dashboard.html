@@ -169,8 +169,10 @@
         {% if complaint.delete_by_student == 0 %}
         <div class="complaint-box">
             
-            <h4>{{ complaint.category }}</h4>
-            <h4>{{ complaint.created_at }}</h4>
+            <h3>{{ complaint.category.category_name }}</h3>
+            <h4>Created at: {{ complaint.created_at }}</h4>
+            {% if complaint.resolved_at %}<h4>Resolved at: {{complaint.resolved_at}}</h4> {% endif %}
+            <h4>Assigned to: {{complaint.staff.full_name}}  (Contact No. {{complaint.staff.phone}})</h4>
             <p>{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: green;">Completed</button>

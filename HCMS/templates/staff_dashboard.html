@@ -168,9 +168,11 @@
         {% for complaint in complaints %}
         {% if complaint.delete_by_staff == 0 %}
         <div class="complaint-box">
-            
-            <h4>{{ complaint.category }}</h4>
-            <h4>{{ complaint.created_at }}</h4>
+            <h3>Student: {{ complaint.student.full_name }} (Contact No. {{complaint.student.phone}})</h3>
+            <h4>Hostel: {{ complaint.student.hostel.hostel_name }}</h4>
+            <h4>Room no: {{complaint.student.room_no}}</h4>
+            <h4>Created at: {{ complaint.created_at }}</h4>
+            <h4>Resolved at: {{ complaint.resolved_at }}</h4>
             <p>{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: #5cb65c;">Completed</button>

@@ -117,11 +117,8 @@ def lodgecomplaint(request):
         describe = request.POST.get('complaint')
 
         category_object = category.objects.get(category_id = c_id)
-        hostel_object = hostel.objects.get(hostel_id = 1)
-        roomno=student_object.room_no
-        #staff_object=staff.objects.get(staff_id=7)
 
-        sample=complaint.objects.create(category=category_object,hostel=hostel_object, student=student_object, description=describe,room_no=roomno)
+        sample=complaint.objects.create(category=category_object, student=student_object, description=describe)
         sample.is_active=True
         if sample.staff is None:
             # Reload the complaint object from the database to fetch the updated staff_id
@@ -242,3 +239,4 @@ def update_staff(request):
         staff_object.phone=p
         staff_object.save()
     return redirect('/staffacc')
+
