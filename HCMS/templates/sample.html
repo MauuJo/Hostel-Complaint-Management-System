@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login</title>
+    <style>
+        .filter-container {
+            position: relative;
+          }
+          
+          .sub-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px; /* Adjust as needed */
+          }
+
+          .selected-filters-box {
+            width: 140px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        #buttons-container {
+            width: 200px;
+            margin-top: 10px;
+        }
+        
+        
+          
+    </style>
+</head>
+
+<body>
+
+    <div class="filter-container">
+        <label for="filter">Filter By:</label>
+        <select id="filter">
+          <option value="">Select Filter</option>
+          <option value="date">Date</option>
+          <option value="category">Category</option>
+          <option value="status">Status</option>
+        </select>
+        <div id="selected-filters-box" class="selected-filters-box" style="display: none;margin-top:10px;"></div>
+        <div id="sub-dropdown" class="sub-dropdown" style="display: none;"></div>
+        <div id="buttons-container" style="display: none;"> <!-- Container for buttons initially hidden -->
+            <button id="saveBtn" style="margin-right:10px;">Save</button>
+            <button id="clearBtn">Clear All Filters</button>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+      <script>
+        let isFirstFilterSelected = false;
+
+document.getElementById("filter").addEventListener("change", function() {
+    const selectedFilter = this.value;
+    if (!isFirstFilterSelected) {
+        document.getElementById("selected-filters-box").style.display = "block";
+        document.getElementById("buttons-container").style.display = "flex"; // Show buttons container after the first selection
+        isFirstFilterSelected = true;
+    }
+    if (selectedFilter !== "") {
+        showSubDropdown(selectedFilter);
+    }
+});
+
+document.getElementById("saveBtn").addEventListener("click", function() {
+    // Handle saving filters here
+    alert("Filters saved!");
+});
+
+document.getElementById("clearBtn").addEventListener("click", function() {
+    clearFilters();
+});
+
+function showSubDropdown(selectedFilter) {
+    const subDropdown = document.getElementById("sub-dropdown");
+    subDropdown.innerHTML = "";
+
+    if (selectedFilter === "date") {
+        const calendar = `
+            <label for="date-filter">Select Date:</label>
+            <input type="date" id="date-filter">
+        `;
+        subDropdown.innerHTML = calendar;
+    } else if (selectedFilter === "category") {
+        const categories = ["Electricity", "LAN", "Plumbing", "Others"];
+        const categoryDropdown = `
+            <label for="category-filter">Select Category:</label>
+            <select id="category-filter">
+                <option value="">Select Category</option>
+                ${categories.map(category => `<option value="${category}">${category}</option>`).join("")}
+            </select>
+        `;
+        subDropdown.innerHTML = categoryDropdown;
+    } else if (selectedFilter === "status") {
+        const statusDropdown = `
+            <label for="status-filter">Select Status:</label>
+            <select id="status-filter">
+                <option value="">Select Status</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+        `;
+        subDropdown.innerHTML = statusDropdown;
+    }
+
+    subDropdown.style.display = "block";
+}
+
+function clearFilters() {
+    document.getElementById("selected-filters-box").innerHTML = ""; // Clear selected filters
+    document.getElementById("sub-dropdown").style.display = "none"; // Hide sub-dropdown
+}
+
+document.getElementById("sub-dropdown").addEventListener("change", function(event) {
+    const selectedFilter = document.getElementById("filter").value;
+    const selectedValue = event.target.value;
+    addSelectedFilter(selectedFilter, selectedValue);
+    hideSubDropdown();
+});
+
+function addSelectedFilter(selectedFilter, selectedValue) {
+    const selectedFiltersBox = document.getElementById("selected-filters-box");
+    const filterItem = document.createElement("div");
+    filterItem.textContent = `${selectedFilter}: ${selectedValue}`;
+    selectedFiltersBox.appendChild(filterItem);
+}
+
+function hideSubDropdown() {
+    document.getElementById("sub-dropdown").style.display = "none";
+}
+
+
+        
+      </script>
+
+</body>
+
+</html>
