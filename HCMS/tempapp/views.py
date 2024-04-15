@@ -4,6 +4,7 @@ from django.contrib.auth import login,logout,authenticate
 from .models import staff, student, hostel, category, complaint
 from django.contrib import messages
 from datetime import datetime
+from django.db import connection
 
 # Create your views here
 from django.db import transaction
@@ -240,3 +241,15 @@ def update_staff(request):
         staff_object.save()
     return redirect('/staffacc')
 
+def filter_complaints(request):
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    with connection.cursor() as cursor:
+        cursor.callproc('filter_complaints', ['2024-04-11',None,None])
+        # If your stored procedure returns a result set, fetch it
+        result_set = cursor.fetchall()
+    context={
+                'name': student_object.full_name,
+                'complaints': result_set,
+            }
+    return render(request,'student_dashboard.html',context)
