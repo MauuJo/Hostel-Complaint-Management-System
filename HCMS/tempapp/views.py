@@ -10,7 +10,7 @@ from django.db import connection
 from django.db import transaction
 
 def home(request):
-    return render(request,'student_dashboard.html')
+    return render(request,'new_homepage.html')
 
 def loginUser_asStudent(request):
     if request.method == "POST":
@@ -244,12 +244,42 @@ def update_staff(request):
 def filter_complaints(request):
     username = request.session.get('username')
     student_object = student.objects.get(student_id = username)
+    if request.method == "POST":
+        d = request.POST.get('datepicker')
+        if d != '':
+            date_obj = datetime.strptime(d, '%Y-%m-%d')
+            fdate = date_obj.strftime('%Y-%m-%d')
+        else:
+            fdate = None
+        c = request.POST.get('category')
+        if c == 'None':
+            c = None
+        s = request.POST.get('status')
+        if s == 'None':
+            s = None
     with connection.cursor() as cursor:
-        cursor.callproc('filter_complaints', ['2024-04-11',None,None])
+        cursor.callproc('filter_complaints', [fdate,c,s,username])
         # If your stored procedure returns a result set, fetch it
         result_set = cursor.fetchall()
+        complaints = []
+        for row in result_set:
+            complaint_obj = complaint(
+                category = category.objects.get(category_id = row[5]),
+                student = student.objects.get(student_id = row[7]),
+                staff = staff.objects.get(staff_id = row[6]),
+                description = row[1],
+                status = row[2],
+                created_at = row[3],
+                resolved_at = row[4],
+                delete_by_student = row[9],
+                delete_by_staff = row[8]
+            )
+            complaints.append(complaint_obj)
+        
+        connection.close()
+
     context={
                 'name': student_object.full_name,
-                'complaints': result_set,
+                'complaints': complaints,
             }
     return render(request,'student_dashboard.html',context)

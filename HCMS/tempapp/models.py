@@ -96,7 +96,7 @@ class complaint(models.Model):
     student = models.ForeignKey(student, on_delete=models.CASCADE) 
     staff = models.ForeignKey(staff, on_delete=models.CASCADE,null=True) 
     description = models.TextField()
-    status = models.BooleanField()
+    status = models.BooleanField(default = 0)
     created_at = models.DateTimeField(auto_now_add=True)
     resolved_at = models.DateTimeField(null=True, blank=True)
     delete_by_student = models.IntegerField(default=0)

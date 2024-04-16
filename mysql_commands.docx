@@ -52,14 +52,16 @@ DELIMITER //
 CREATE PROCEDURE filter_complaints(
     IN filter_date DATE,
     IN filter_category INT,
-    IN filter_status INT
+    IN filter_status INT,
+    IN studentID INT
 )
 BEGIN
     -- Select data based on all provided filters
     SELECT * FROM complaint
     WHERE (filter_date IS NULL OR DATE(created_at) = filter_date)
       AND (filter_category IS NULL OR category_id = filter_category)
-      AND (filter_status IS NULL OR status = filter_status);
+      AND (filter_status IS NULL OR status = filter_status)
+      AND studentID = student_id;
 END //
 
 DELIMITER ;

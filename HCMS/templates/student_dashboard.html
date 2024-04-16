@@ -214,7 +214,7 @@
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
         </div>
 
-        <button style="height:50px;width:100px;"><a href="#popup">Click me</a></button>
+        <button style="height:50px;width:100px;"><a href="#popup">Filter complaints by</a></button>
 
     <div id="popup" class="popup">
     <div class="popup-content">
@@ -222,7 +222,8 @@
         <p>Select Filters : </p>
         
         <!-- Form to submit data -->
-        <form id="popup-form" action="/your-django-endpoint/" method="post">
+        <form id="popup-form" action="/filter_complaints" method="post">
+            {% csrf_token %}
         <!-- Your form fields go here -->
 
         <span >Date : </span>
@@ -232,7 +233,7 @@
             <span class="detail-name">Category :</span>
             
             <select class="detail-value" id="category" name="category" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
-                <option value="" selected hidden></option>
+                <option value="None" selected hidden></option>
                 <option value="1">Electricity</option>
                     <option value="2">Ethernet</option>
                     <option value="3">Water-cooler</option>
@@ -244,9 +245,9 @@
             <span class="detail-name">Status :</span>
             
             <select class="detail-value" id="cstatus" name="status" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
-                <option value="" selected hidden></option>
-                <option value="1">Pending</option>
-                <option value="2">Completed</option>
+                <option value="None" selected hidden></option>
+                <option value="0">Pending</option>
+                <option value="1">Completed</option>
                     
             </select>
         </div>
