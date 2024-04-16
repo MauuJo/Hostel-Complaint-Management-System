@@ -10,7 +10,7 @@ from django.db import connection
 from django.db import transaction
 
 def home(request):
-    return render(request,'new_homepage.html')
+    return render(request,'student_dashboard.html')
 
 def loginUser_asStudent(request):
     if request.method == "POST":

@@ -122,6 +122,49 @@
             pointer-events: none; /* Prevent the text from being clickable */
         }
         
+        .filter-container {
+            position: relative;
+            width: 300px; /* Set a fixed width for the filter container */
+            margin-top: 20px;  /* Center the filter container */
+            
+        }
+        
+        .sub-dropdown {
+            position: absolute;
+            top: calc(100% + 10px); /* Position the sub-dropdown below the filter container */
+            left: -7px;
+            z-index: 1000;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px;
+            width: 200px; /* Adjust as needed */
+            font-size: 13px;
+            height: 80px;
+            margin-left:-5px;
+        }
+        
+        .sub-dropdown > * {
+            display: inline-block; /* Display elements side by side */
+            margin-right: 5px; /* Add some space between items */
+        }
+        
+        
+        
+
+          .selected-filters-box {
+            width: 150px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            font-size:13px;
+        }
+        #buttons-container {
+            width: 250px;
+            margin-top: 10px;
+        }
+        
 
         
 
@@ -135,7 +178,7 @@
 <body style="margin-bottom:100px;background-color: #F0F0F0;">
     <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="background-color: #e0e0e0; padding-left: 50px; padding-right: 50px; width: 100%; height:80px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">Hostel Complaint Management System</a>
+          <a class="navbar-brand" href="#" style="font-size: 25px; font-weight: 600;">Hostel Complaint Redressal System</a>
           <div class="nav_bar" style="margin-top: 20px;">
             <ul >
                 
@@ -151,18 +194,39 @@
     
 
     <div style="width: 100%; text-align:left; padding-left:25px;">
+        <div style="width: 100%; display: flex; justify-content: space-between;margin-bottom:50px;">
         <div style="margin-left:40px;">
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Welcome {{name}}</p>
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
+        </div>
+
+        <div class="filter-container">
+            <label for="filter">Filter By:</label>
+            <select id="filter">
+                <option value="">Select Filter</option>
+                <option value="date">Date</option>
+                <option value="category">Category</option>
+                <option value="status">Status</option>
+            </select>
+            <div id="selected-filters-box" class="selected-filters-box" style="display: none;margin-top:10px;"></div>
+            <div id="sub-dropdown" class="sub-dropdown" style="display: none;margin:10px;"></div>
+            <div id="buttons-container" style="display: none;margin-bottom:10px;"> <!-- Container for buttons initially hidden -->
+                <button id="saveBtn" style="margin-right:10px;height:20px;padding-top:0px;font-size:15px;padding-right:10px;padding-left:10px;padding-bottom:10px;" onclick="redirectToNewPage_filter()">Save</button>
+                <button id="clearBtn" style="height:20px;padding-top:0px;font-size:15px;padding-right:10px;padding-left:10px;padding-bottom:10px;">Clear All Filters</button>
+            </div>
+        </div>
+        </div>
+
         <!-- Check if complaints exist -->
         <!-- If no complaints, display "No complaints registered yet" -->
         <!-- If complaints exist, display them in boxes side by side -->
+        
         {% if not complaints %}
         <div>
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
             <p>No complaints registered yet</p>
         </div>
-        </div>
+
         {% else %}
         <div class="complaint-box-container">
         {% for complaint in complaints %}
@@ -188,6 +252,7 @@
         {% endfor %}
         </div>
         {% endif %}
+        
     </div>
     
 
@@ -267,5 +332,97 @@
           window.location.href = "/";
         }
     </script>
+    <script>
+        function  redirectToNewPage_filter(){
+          window.location.href = "/filter_complaints";
+        }
+      </script>
+   
+
+    <script>
+            let isFirstFilterSelected = false;
+
+            document.getElementById("filter").addEventListener("change", function() {
+                const selectedFilter = this.value;
+                if (!isFirstFilterSelected) {
+                    document.getElementById("selected-filters-box").style.display = "block";
+                    document.getElementById("buttons-container").style.display = "flex"; // Show buttons container after the first selection
+                    isFirstFilterSelected = true;
+                }
+                if (selectedFilter !== "") {
+                    showSubDropdown(selectedFilter);
+                }
+            });
+
+            document.getElementById("saveBtn").addEventListener("click", function() {
+                // Handle saving filters here
+                alert("Filters saved!");
+            });
+
+            document.getElementById("clearBtn").addEventListener("click", function() {
+                clearFilters();
+            });
+
+            function showSubDropdown(selectedFilter) {
+                const subDropdown = document.getElementById("sub-dropdown");
+                subDropdown.innerHTML = "";
+
+                if (selectedFilter === "date") {
+                    const calendar = `
+                        <label for="date-filter">Select Date:</label>
+                        <input type="date" id="date-filter">
+                    `;
+                    subDropdown.innerHTML = calendar;
+                } else if (selectedFilter === "category") {
+                    const categories = ["Electricity", "LAN", "Plumbing", "Others"];
+                    const categoryDropdown = `
+                        <label for="category-filter">Select Category:</label>
+                        <select id="category-filter">
+                            <option value="">Select Category</option>
+                            ${categories.map(category => `<option value="${category}">${category}</option>`).join("")}
+                        </select>
+                    `;
+                    subDropdown.innerHTML = categoryDropdown;
+                } else if (selectedFilter === "status") {
+                    const statusDropdown = `
+                        <label for="status-filter">Select Status:</label>
+                        <select id="status-filter">
+                            <option value="">Select Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    `;
+                    subDropdown.innerHTML = statusDropdown;
+                }
+
+                subDropdown.style.display = "block";
+            }
+
+            function clearFilters() {
+                document.getElementById("selected-filters-box").innerHTML = ""; // Clear selected filters
+                document.getElementById("sub-dropdown").style.display = "none"; // Hide sub-dropdown
+            }
+
+            document.getElementById("sub-dropdown").addEventListener("change", function(event) {
+                const selectedFilter = document.getElementById("filter").value;
+                const selectedValue = event.target.value;
+                addSelectedFilter(selectedFilter, selectedValue);
+                hideSubDropdown();
+            });
+
+            function addSelectedFilter(selectedFilter, selectedValue) {
+                const selectedFiltersBox = document.getElementById("selected-filters-box");
+                const filterItem = document.createElement("div");
+                filterItem.textContent = `${selectedFilter}: ${selectedValue}`;
+                selectedFiltersBox.appendChild(filterItem);
+            }
+
+            function hideSubDropdown() {
+                document.getElementById("sub-dropdown").style.display = "none";
+            }
+
+
+        
+      </script>
 </body>
 </html>
