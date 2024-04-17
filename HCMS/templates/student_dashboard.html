@@ -214,7 +214,9 @@
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
         </div>
 
-        <button style="height:30px;" onclick="redirectTofilterPopup()">Filter complaints by</button>
+        <button style="background-color:#ED5D47; margin-top:20px; margin-right:70px; height: 30px; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.backgroundColor='#FFA07A'" onmouseout="this.style.backgroundColor='#ED5D47'" onclick="redirectTofilterPopup()">Filter complaints by</button>
+
+
 
     <div id="popup" class="popup">
     <div class="popup-content">
@@ -225,14 +227,16 @@
         <form id="popup-form" action="/filter_complaints" method="post">
             {% csrf_token %}
         <!-- Your form fields go here -->
-
+        
+        <div style="margin-bottom:10px;">
         <span >Date : </span>
-        <input type="date" id="datepicker" name="datepicker">
+        <input type="date" id="datepicker" name="datepicker" style="height:25px;margin-left:50px;width:300px;">
+        </div>
 
-        <div class="student-detail">
+        <div class="student-detail" style="margin-bottom:10px;">
             <span class="detail-name">Category :</span>
             
-            <select class="detail-value" id="category" name="category" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
+            <select class="detail-value" id="category" name="category" style="width:300px;margin-left:20px;padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;height:25px;" required >
                 <option value="None" selected hidden></option>
                 <option value="1">Electricity</option>
                     <option value="2">Ethernet</option>
@@ -241,10 +245,10 @@
             </select>
         </div>
 
-        <div class="student-detail">
+        <div class="student-detail" style="margin-bottom:20px;">
             <span class="detail-name">Status :</span>
             
-            <select class="detail-value" id="cstatus" name="status" style="padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;" required >
+            <select class="detail-value" id="cstatus" name="status" style="width:300px;margin-left:42px;padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;height:25px;" required >
                 <option value="None" selected hidden></option>
                 <option value="0">Pending</option>
                 <option value="1">Completed</option>
@@ -255,7 +259,11 @@
         
         
         <!-- Save button -->
-        <button type="submit" id="save-button">Save</button>
+        <div style="display: flex;text-align:center;">
+            <button type="submit" style="margin-right:20px;">Save</button>
+            <button type="submit" onclick="redirectTocomplaints()">Clear all filters</button>
+        </div>
+        
         </form>
     </div>
     </div>
@@ -369,6 +377,11 @@
     <script>
         function redirectToNewPage_student_profile() {
           window.location.href = "/studentacc";
+        }
+      </script>
+      <script>
+        function redirectTocomplaints() {
+          window.location.href = "/lodgecomplaint";
         }
       </script>
       <script>

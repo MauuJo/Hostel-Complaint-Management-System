@@ -122,7 +122,62 @@
             pointer-events: none; /* Prevent the text from being clickable */
         }
         
-
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+          }
+          
+          /* Show the popup when it is targeted */
+          .popup:target {
+            display: block;
+          }
+          
+          .popup-content {
+            background-color: #fff;
+            width: 80%;
+            max-width: 600px;
+            margin: 100px auto; /* Center the popup vertically and horizontally */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          }
+          
+          .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
+          
+          .close a {
+            color: #333;
+            text-decoration: none;
+          }
+          
+          .close a:hover {
+            text-decoration: underline;
+          }
+          
+          /* Add CSS for form elements as needed */
+          
+          /* Styling for the save button */
+          #save-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          
+          #save-button:hover {
+            background-color: #0056b3;
+          }
+          
         
 
         
@@ -151,18 +206,63 @@
     
 
     <div style="width: 100%; text-align:left; padding-left:25px;">
+        <div style="width: 100%; display: flex; justify-content: space-between;margin-bottom:50px;">
         <div style="margin-left:40px;">
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Welcome {{name}}</p>
         <p style="font-size:20px; font-weight:500; margin-top:20px;">Complaints</p>
-        <!-- Check if complaints exist -->
-        <!-- If no complaints, display "No complaints registered yet" -->
-        <!-- If complaints exist, display them in boxes side by side -->
+        </div>
+
+    
+    <button style="background-color:#ED5D47; margin-top:20px; margin-right:70px; height: 30px; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.backgroundColor='#FFA07A'" onmouseout="this.style.backgroundColor='#ED5D47'" onclick="redirectTofilterPopup()">Filter complaints by</button>
+
+
+    <div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close"><a href="#">Close</a></span>
+        <p>Select Filters : </p>
+        
+        <!-- Form to submit data -->
+        <form id="popup-form" action="/filter_complaints_staff" method="post">
+            {% csrf_token %}
+        <!-- Your form fields go here -->
+        
+        <div style="margin-bottom:10px;">
+        <span >Date : </span>
+        <input type="date" id="datepicker" name="datepicker" style="height:25px;margin-left:50px;width:300px;">
+        </div>
+
+        
+
+        <div class="student-detail" style="margin-bottom:20px;">
+            <span class="detail-name">Status :</span>
+            
+            <select class="detail-value" id="cstatus" name="status" style="width:300px;margin-left:42px;padding-left: 20px;padding-top:5px;padding-bottom:5px;text-align:left;height:25px;" required >
+                <option value="None" selected hidden></option>
+                <option value="0">Pending</option>
+                <option value="1">Completed</option>
+                    
+            </select>
+        </div>
+
+        
+        
+        <!-- Save button -->
+        <div style="display: flex;text-align:center;">
+            <button type="submit" style="margin-right:20px;">Save</button>
+            <button type="submit" onclick="redirectTocomplaints()">Clear all filters</button>
+        </div>
+        
+        </form>
+    </div>
+    </div>
+        </div>
+
         {% if not complaints %}
         <div>
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
             <p>No complaints registered yet</p>
         </div>
-        </div>
+        
         {% else %}
         <div class="complaint-box-container">
         {% for complaint in complaints %}
@@ -205,6 +305,16 @@
       <script>
         function redirectToNewPage_home() {
           window.location.href = "/";
+        }
+    </script>
+    <script>
+        function redirectTocomplaints() {
+          window.location.href = "/checkcomplaint";
+        }
+    </script>
+    <script>
+        function  redirectTofilterPopup(){
+            window.location.href = "#popup";
         }
     </script>
 
