@@ -226,6 +226,13 @@
             display: flex; /* Enable flexbox layout */
             align-items: center; /* Align items vertically */
         }
+        .error {
+            background-color: #FFCDD2; /* Red background color */
+        }
+        
+        .success {
+            background-color: #74B72E; /* Green background color */
+        }
         
     </style>
 
@@ -238,8 +245,8 @@
 
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
-        <div>{{ message }}</div> <!-- Align text with the button -->
+    <div class="alert alert-dismissible fade my-0 {% if message.tags == 'error' %} error {% elif message.tags == 'success' %} success {% endif %}" role="alert">
+        <div>{{ message }}</div>
         <div class="right-align">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background-color: transparent;">
                 <span aria-hidden="true">&times;</span>

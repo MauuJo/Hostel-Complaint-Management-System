@@ -283,3 +283,83 @@ def filter_complaints(request):
                 'complaints': complaints,
             }
     return render(request,'student_dashboard.html',context)
+
+def filter_complaints_staff(request):
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    if request.method == "POST":
+        d = request.POST.get('datepicker')
+        if d != '':
+            date_obj = datetime.strptime(d, '%Y-%m-%d')
+            fdate = date_obj.strftime('%Y-%m-%d')
+        else:
+            fdate = None
+        s = request.POST.get('status')
+        if s == 'None':
+            s = None
+    with connection.cursor() as cursor:
+        cursor.callproc('filter_complaints_staff', [fdate,s,username])
+        # If your stored procedure returns a result set, fetch it
+        result_set = cursor.fetchall()
+        complaints = []
+        for row in result_set:
+            complaint_obj = complaint(
+                category = category.objects.get(category_id = row[5]),
+                student = student.objects.get(student_id = row[7]),
+                staff = staff.objects.get(staff_id = row[6]),
+                description = row[1],
+                status = row[2],
+                created_at = row[3],
+                resolved_at = row[4],
+                delete_by_student = row[9],
+                delete_by_staff = row[8]
+            )
+            complaints.append(complaint_obj)
+        
+        connection.close()
+
+    context={
+                'name': staff_object.full_name,
+                'complaints': complaints,
+            }
+    return render(request,'staff_dashboard.html',context)
+
+def deleteacc(request):
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    student_object.delete()
+    messages.success(request,"Account deleted successfully")
+    return redirect('/')
+
+def deleteacc_staff(request):
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    complaints=complaint.objects.filter(staff_id=staff_object)
+    for c in complaints:
+        if c.status == 0:
+            messages.error(request,"Cannot delete account, please complete pending requests.")
+            return redirect('/checkcomplaint')
+    staff_object.delete()
+    messages.success(request,"Account deleted successfully")
+    return redirect('/')
+
+def changepassword_student(request):
+    username = request.session.get('username')
+    student_object = student.objects.get(student_id = username)
+    if request.method == "POST":
+        passw = request.POST.get('password')
+    student_object.password=passw
+    student_object.save()
+    messages.success(request,"Password changed successfully, please login again")
+    return redirect('/login')
+
+def changepassword_staff(request):
+    username = request.session.get('username')
+    staff_object = staff.objects.get(staff_id = username)
+    if request.method == "POST":
+        passw = request.POST.get('password')
+    staff_object.password=passw
+    staff_object.save()
+    messages.success(request,"Password changed successfully, please login again")
+    return redirect('/login_staff')
+
