@@ -167,11 +167,24 @@
             </div>
     
             <button type="submit" style="margin-left:25px;margin-left: 70px;" onclick="redirectToNewPage_editstudent()">Edit Profile</button>
-        
+            <button type="submit" style="margin-left: 20px;" onclick="confirmDelete()">Delete Account</button>
+
     
         
     
     
+    <script>
+        function confirmDelete() {
+            if (confirm("Do you really want to delete your account?")) {
+                // If user clicks 'OK', proceed with account deletion
+                window.location.href = "{% url 'deleteacc' %}"; // Replace 'delete_account' with your actual delete account URL
+            } else {
+                // If user clicks 'Cancel', go back to student profile page
+                window.location.href = "{% url 'studentacc' %}"; // Replace 'student_profile' with your actual student profile page URL
+            }
+        }
+        
+    </script>
 
     <script>
         function redirectToNewPage_student_dashboard() {
