@@ -347,19 +347,42 @@ def changepassword_student(request):
     username = request.session.get('username')
     student_object = student.objects.get(student_id = username)
     if request.method == "POST":
-        passw = request.POST.get('password')
-    student_object.password=passw
-    student_object.save()
-    messages.success(request,"Password changed successfully, please login again")
-    return redirect('/login')
+        old = request.POST.get('old_password')
+        new = request.POST.get('new_password')
+        confirm = request.POST.get('confirm_password')
+        if student_object.password==old:
+            if new==confirm:
+                if old!=new:
+                    student_object.password=new
+                    student_object.save()
+                    messages.success(request,"Password changed successfully, please login again.")
+                    return redirect('/login')
+                else:
+                    messages.error(request,"Please choose a different password")
+            else:
+                messages.error(request,"Please make sure confirm password matches the newly entered password.")
+        else:
+            messages.error(request,"Incorrect account password")
+    return redirect('/studentacc')  
 
 def changepassword_staff(request):
     username = request.session.get('username')
     staff_object = staff.objects.get(staff_id = username)
     if request.method == "POST":
-        passw = request.POST.get('password')
-    staff_object.password=passw
-    staff_object.save()
-    messages.success(request,"Password changed successfully, please login again")
-    return redirect('/login_staff')
-
+        old = request.POST.get('old_password')
+        new = request.POST.get('new_password')
+        confirm = request.POST.get('confirm_password')
+        if staff_object.password==old:
+            if new==confirm:
+                if old!=new:
+                    staff_object.password=new
+                    staff_object.save()
+                    messages.success(request,"Password changed successfully, please login again.")
+                    return redirect('/login_staff')
+                else:
+                    messages.error(request,"Please choose a different password")
+            else:
+                messages.error(request,"Please make sure confirm password matches the newly entered password.")  
+        else:
+            messages.error(request,"Incorrect account password")
+    return redirect('/staffacc')
