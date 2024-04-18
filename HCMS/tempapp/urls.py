@@ -37,4 +37,9 @@ urlpatterns = [
     path("editstaff", views.edit_staff,name='editstaff'),
     path("updatestaff", views.update_staff,name='updatestaff'),
     path("filter_complaints",views.filter_complaints,name='filter_complaints'),
+    path("filter_complaints_staff",views.filter_complaints_staff,name='filter_complaints_staff'),
+    path("deleteacc",views.deleteacc,name='deleteacc'),
+    path("deleteacc_staff",views.deleteacc_staff,name='deleteacc_staff'),
+    path("changepassword_student",views.changepassword_student,name='changepassword_student'),
+    path("changepassword_staff",views.changepassword_staff,name='changepassword_staff'),
 ]

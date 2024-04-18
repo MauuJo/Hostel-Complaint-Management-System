@@ -44,6 +44,31 @@ END //
 
 DELIMITER ;
 
+Trigger on deletion from student
+DELIMITER //
+
+CREATE TRIGGER decrease_staff_count
+AFTER DELETE ON complaint
+FOR EACH ROW
+BEGIN
+    DECLARE cat_id INT;
+
+    IF OLD.status = 0 THEN
+        
+        -- Get the category ID of the deleted complaint
+        SELECT category_id INTO cat_id
+        FROM staff
+        WHERE staff_id = OLD.staff_id;
+
+        -- Decrease the count of staff for the corresponding category
+        UPDATE staff
+        SET count = count - 1
+        WHERE category_id = cat_id;
+    END IF;
+END //
+
+DELIMITER ;
+
 
 Stored procedure:
 
@@ -62,6 +87,25 @@ BEGIN
       AND (filter_category IS NULL OR category_id = filter_category)
       AND (filter_status IS NULL OR status = filter_status)
       AND studentID = student_id;
+END //
+
+DELIMITER ;
+
+Filter complaints for staff stored procedure:
+
+DELIMITER //
+
+CREATE PROCEDURE filter_complaints_staff(
+    IN filter_date DATE,
+    IN filter_status INT,
+    IN staffID INT
+)
+BEGIN
+    -- Select data based on all provided filters
+    SELECT * FROM complaint
+    WHERE (filter_date IS NULL OR DATE(created_at) = filter_date)
+      AND (filter_status IS NULL OR status = filter_status)
+      AND staffID = staff_id;
 END //
 
 DELIMITER ;
