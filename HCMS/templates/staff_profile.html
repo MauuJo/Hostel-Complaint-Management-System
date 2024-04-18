@@ -223,7 +223,7 @@
 
             <div id="popup" class="popup">
                 <div class="popup-content">
-                    <span class="close"><a href="#">Close</a></span>
+                    
                     <p>Change Password : </p>
                     
                     <!-- Form to submit data -->
@@ -253,6 +253,7 @@
                     <!-- Save button -->
                     <div style="display: flex;text-align:center;">
                         <button type="submit" style="margin-right:20px;">Save</button>
+                        <button type="submit" style="margin-right:20px;" onclick="redirectToClose()">Close</button>
                         
                     </div>
                     
@@ -305,6 +306,13 @@
             }
         });
     </script>
+
+    <script>
+        function redirectToClose(){
+          window.location.href = "#";
+        }
+      </script>
+    
 
     
     
