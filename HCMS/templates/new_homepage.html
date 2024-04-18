@@ -358,6 +358,17 @@
           window.location.href = "/login_staff";
         }
     </script>
+
+    <script>
+        // Get the elements with the class "alert" and iterate over them
+        document.querySelectorAll('.alert').forEach(function(alertElement) {
+            // Add event listener to each alert for when it is closed
+            alertElement.querySelector('.close').addEventListener('click', function() {
+                // Hide the alert when the close button is clicked
+                alertElement.style.display = 'none';
+            });
+        });
+    </script>
     
 
 </body>
