@@ -19,7 +19,7 @@ The Hostel Complaint Management System seeks to facilitate seamless complaint su
 - Complaint redressal: Staff can resolve and update complaint status.
 
 ## Schema Diagram
-![Entity Relationship Diagram](./images/HCMS(Schema_Diagram).drawio.png)
+![Entity Relationship Diagram](./images/HCMS_schemaDiagram.drawio.png)
 
 ## Project Preview
 
