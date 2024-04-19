@@ -57,14 +57,16 @@
         }
 
         .complaint-box {
-            width: 350px;
+            width: 250px;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 15px;
-            margin-bottom: 20px;
-            flex: 0 0 30%; /* Set the width of each box */
-            margin: 35px;
-            background-color: #FFFFFF
+            margin-bottom: 10px;
+            flex: 0 0 22%; /* Set the width of each box */ 
+            background-color: #FFFFFF;
+            margin-left:20px;
+            flex-direction: column;
+            
         }
         
         .complaint-box h3 {
@@ -275,22 +277,22 @@
         <!-- If complaints exist, display them in boxes side by side -->
         
         {% if not complaints %}
-        <div>
+        <div style="margin-left:40px;">
             <!-- If complaints exist, replace the below code with the complaints in boxes -->
             <p>No complaints registered yet</p>
         </div>
 
         {% else %}
-        <div class="complaint-box-container">
+        <div class="complaint-box-container" style="margin-top:-40px;margin-left:20px;">
         {% for complaint in complaints %}
         {% if complaint.delete_by_student == 0 %}
-        <div class="complaint-box">
+        <div class="complaint-box" style="width:250px;">
             
             <h3>{{ complaint.category.category_name }}</h3>
             <h4>Created at: {{ complaint.created_at }}</h4>
             {% if complaint.resolved_at %}<h4>Resolved at: {{complaint.resolved_at}}</h4> {% endif %}
             <h4>Assigned to: {{complaint.staff.full_name}}  (Contact No. {{complaint.staff.phone}})</h4>
-            <p>{{ complaint.description }}</p>
+            <p style="width: calc(100% - 30px);margin-top:8">{{ complaint.description }}</p>
             {% if complaint.status == 1 %}
             <button class="status-button" style="background-color: green;">Completed</button>
             <!--<button class="status-button" style="background-color: hsl(195, 56%, 62%);"><a href="{% url 'delete_by_student' %}?complaint_id={{complaint.id}}" style="color: white;">Delete</a></button>-->
