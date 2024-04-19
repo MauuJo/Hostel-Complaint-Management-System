@@ -36,8 +36,8 @@ The Hostel Complaint Management System seeks to facilitate seamless complaint su
 
 **Submitting Complaint:**
 <p float="left">
-  <img src="./images/select_complaint_category.png" width="500" />
-  <img src="./images/submit_complaint.png" width="500" /> 
+  <img src="./images/select_complaint_category.png" width="300" />
+  <img src="./images/submit_complaint.png" width="300" /> 
 </p>
 
 **Student Dashboard:**(After submitting comaplint)
