@@ -1,4 +1,58 @@
-Creating trigger:
+Creating database: CREATE DATABASE hcms;
+
+Creating Tables:
+
+CREATE TABLE category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE staff (
+    staff_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    category_id INT,
+    count INT DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE
+);
+
+CREATE TABLE hostel (
+    hostel_id INT AUTO_INCREMENT PRIMARY KEY,
+    hostel_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE student (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    hostel_id INT,
+    room_no INT,
+    FOREIGN KEY (hostel_id) REFERENCES hostel(hostel_id) ON DELETE CASCADE
+);
+
+CREATE TABLE complaint (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT,
+    student_id INT,
+    staff_id INT,
+    description TEXT,
+    status BOOLEAN,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    resolved_at DATETIME,
+    delete_by_student INT DEFAULT 0,
+    delete_by_staff INT DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (staff_id) REFERENCES staff(staff_id) ON DELETE CASCADE
+);
+
+Creating Triggers:
+
+Trigger to auto-assign staff according to category. At max, a staff can have only 5 active(pending) complaints:
 
 DELIMITER //
 CREATE TRIGGER assign_staff
@@ -29,7 +83,7 @@ BEGIN
             LEAVE fetch_staff;
         END IF;
 
-        IF c <= 5 THEN
+        IF c <= 4 THEN
             SET NEW.staff_id = s;
             UPDATE staff
             SET count = count + 1
@@ -44,7 +98,8 @@ END //
 
 DELIMITER ;
 
-Trigger on deletion from student
+Trigger on deletion of student account, updating the count of respective staffs:
+
 DELIMITER //
 
 CREATE TRIGGER decrease_staff_count
@@ -69,8 +124,9 @@ END //
 
 DELIMITER ;
 
+Stored procedures:
 
-Stored procedure:
+Procedure to filter complaints according to status, category and date: (for student)
 
 DELIMITER //
 

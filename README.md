@@ -22,6 +22,57 @@ The Hostel Complaint Management System seeks to facilitate seamless complaint su
 ![Entity Relationship Diagram](./images/HCMS_schemaDiagram.drawio.png)
 
 ## Project Preview
+**Homepage:**
+![homepage](./images/homepage.png)
+
+**Student Login:**
+![student_login](./images/student_login.png)
+
+**Student Signup:**
+![student_signup](./images/student_signup.png)
+
+**Student Dashboard:** (when no complaints are registered)
+![student_dashboard](./images/student_dashboard.png)
+
+**Submitting Complaint:**
+<div style="display:flex;">
+<img src="./images/select_complaint_category.png" alt="complaint1" style="width:50%;">
+<img src="./images/submit_complaint.png" alt="complaint2" style="width:50%;">
+</div>
+
+**Student Dashboard:**(After submitting comaplint)
+![after_complaint](./images/student_dashboard_with_complaint.png)
+
+**Option for filtering Complaints:**
+![filter_complaints](./images/filter_student.png)
+
+**Student profile:**
+![Student_acc](./images/student_acc.png)
+
+**Edit profile:**
+![edit_student_acc](./images/edit_student_profile.png)
+
+**Change Password:**
+![Student_pass_change](./images/change_password_student.png)
+
+**Staff login:**
+![Staff_login](./images/staff_login.png)
+
+**Staff Signup:**
+![staff_signup](./images/staff_signup.png)
+
+**Staff Dashboard:**
+![staff_dashboard](./images/staff_dashboard.png)
+
+**Staff Dashboard after updating complaint status:**
+![complaint_status_update](./images/staff_update_status.png)
+
+**Staff filter for complaints:**
+![staff_filter](./images/staff_filter.png)
+
+**Student dashboard after complaint completion:**
+![updated](./images/student_after_update.png)
+
 
 ## Scope (Further improvements)
 - Other complaint categories that can be added: Cleanliness & sanitation, Mess-related issues, Staff service issues etc.
