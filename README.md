@@ -80,4 +80,12 @@ The Hostel Complaint Management System seeks to facilitate seamless complaint su
 - Caretakers can be added as intermediatery users for supervisory purposes.
 - Prioritize grievances. 
 
+## Deployment
+
+Make sure you have the appropriate django environment to run this project.
+
+- **Follow these steps:**
+  - -> Clone the repository 
+  - -> Run "python manage.py runserver" on the terminal 
+(make sure you are in the parent HCMS directory)
 
